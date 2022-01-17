@@ -1,3 +1,4 @@
-## Bowling Game
+## Unit testing & TDD with Java
 
-A bowling game simulation created in Java using TDD.
+###Includes:
+- a bowling game created using TDD
