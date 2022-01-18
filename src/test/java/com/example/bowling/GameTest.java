@@ -47,5 +47,15 @@ class GameTest {
 
         assertThat(result).isEqualTo(10);
     }
+    @Test
+    void scoreIncreasesInMoreThanOneStandardFrame() {
+        game.roll(7);
+        game.roll(8);
+        game.roll(5);
+
+        int result = game.score();
+
+        assertThat(result).isEqualTo(15);
+    }
 
 }
