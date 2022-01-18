@@ -7,12 +7,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
 
+    Game game = new Game();
+
     @Test
     void scoreShouldReturnZeroWhenGameStarts() {
-        Game game = new Game();
-
         int result = game.score();
 
         assertThat(result).isZero();
+    }
+
+    @Test
+    void scoreShouldReturnArgumentGivenToRoll() {
+        game.roll(5);
+
+        int result = game.score();
+
+        assertThat(result).isEqualTo(5);
     }
 }
