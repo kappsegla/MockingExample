@@ -7,9 +7,12 @@ public class Game {
     private final int MAXIMUM_FRAMES = 10;
     private int actualRolls;
     private int expectedRolls;
+    private int currentFrameScore;
+    private int maximumFrameScore;
 
     public Game() {
         expectedRolls = 2;
+        maximumFrameScore = 10;
     }
 
     public int score() {
@@ -20,12 +23,23 @@ public class Game {
         if(frames >= MAXIMUM_FRAMES || actualRolls >= expectedRolls)
            return;
 
-        score += value;
+        if(currentFrameScore < maximumFrameScore) {
+            if( (value + currentFrameScore) < maximumFrameScore) {
+                score += value;
+                currentFrameScore += value;
+            } else {
+                int difference = maximumFrameScore - currentFrameScore;
+                score += difference;
+                currentFrameScore += difference;
+            }
+        }
+
         actualRolls++;
 
         if(actualRolls == expectedRolls) {
             frames++;
             actualRolls = 0;
+            currentFrameScore = 0;
         }
     }
 

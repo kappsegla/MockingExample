@@ -38,4 +38,14 @@ class GameTest {
         assertThat(result).isEqualTo(20);
     }
 
+    @Test
+    void maximum10PointsPerStandardFrame() {
+        game.roll(7);
+        game.roll(8);
+
+        int result = game.score();
+
+        assertThat(result).isEqualTo(10);
+    }
+
 }
