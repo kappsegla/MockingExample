@@ -26,7 +26,7 @@ class GameTest {
     }
 
     @Test
-    void maximumOf10FramesEquivalentToTwentyRegularRolls() {
+    void maximumOf10FramesEquivalentToTwentyStandardRolls() {
         int frames = 12;
         for (int i = 0; i < frames; i++) {
             game.roll(1);
@@ -37,4 +37,5 @@ class GameTest {
 
         assertThat(result).isEqualTo(20);
     }
+
 }
