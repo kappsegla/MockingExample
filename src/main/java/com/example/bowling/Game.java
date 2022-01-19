@@ -4,7 +4,7 @@ public class Game {
 
     private int score;
     private int frames;
-    private final int MAXIMUM_FRAMES = 10;
+    private static final int MAXIMUM_FRAMES = 10;
     private int actualRolls;
     private int expectedRolls;
     private int currentFrameScore;
@@ -18,13 +18,19 @@ public class Game {
     public int score() {
         return score;
     }
-
+    
     public void roll(int value) {
-        if(frames >= MAXIMUM_FRAMES || actualRolls >= expectedRolls)
+        if(rollIsDisallowed())
            return;
 
+        calculateScore(value);
+        actualRolls++;
+        startNextFrame();
+    }
+
+    private void calculateScore(int value) {
         if(currentFrameScore < maximumFrameScore) {
-            if( (value + currentFrameScore) < maximumFrameScore) {
+            if((value + currentFrameScore) < maximumFrameScore) {
                 score += value;
                 currentFrameScore += value;
             } else {
@@ -33,14 +39,18 @@ public class Game {
                 currentFrameScore += difference;
             }
         }
+    }
 
-        actualRolls++;
-
+    private void startNextFrame() {
         if(actualRolls == expectedRolls) {
             frames++;
             actualRolls = 0;
             currentFrameScore = 0;
         }
+    }
+
+    private boolean rollIsDisallowed() {
+        return frames >= MAXIMUM_FRAMES || actualRolls >= expectedRolls;
     }
 
 }
