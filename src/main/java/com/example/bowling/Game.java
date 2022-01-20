@@ -27,57 +27,57 @@ public class Game {
         if(rollIsDisallowed())
            return;
 
-        resetBonus();
+        if(bonusHasBeenCalculated())
+            resetBonus();
 
-        if(isStrike(value)) {
-            if(bonus) {
-                doubleStrike = true;
-                score += 2 * value;
-                maximumBonusCount = 3;
-            } else {
-                bonus = true;
-                score += value;
-                maximumBonusCount = 2;
-            }
-            frames++;
+        if(strike(value)) {
+            handleStrike(value);
         } else {
             calculateScore(value);
             nextRoll();
         }
     }
 
-    private void resetBonus() {
-        if(bonus && actualBonusCount >= maximumBonusCount) {
-            bonus = false;
-            actualBonusCount = 0;
-            maximumBonusCount = 0;
-        }
+    private boolean rollIsDisallowed() {
+        return frames >= MAXIMUM_FRAMES || actualRolls >= expectedRolls;
     }
 
-    private boolean isStrike(int value) {
+    private boolean bonusHasBeenCalculated() {
+        return bonus && actualBonusCount >= maximumBonusCount;
+    }
+
+    private void resetBonus() {
+        bonus = false;
+        actualBonusCount = 0;
+        maximumBonusCount = 0;
+    }
+
+    private boolean strike(int value) {
         return actualRolls == 0 && value == 10;
     }
 
+    private void handleStrike(int value) {
+        if(bonus) {
+            doubleStrike = true;
+            score += 2 * value;
+        } else {
+            bonus = true;
+            score += value;
+
+        }
+        maximumBonusCount = 2;
+        frames++;
+    }
+
     private void calculateScore(int value) {
-//        if(currentFrameScore < maximumFrameScore) {
-//            // strike handled further up
-//        }
         if((value + currentFrameScore) < maximumFrameScore) {
-            handleDoubleStrike(value);
+            calculateDoubleStrike(value);
             score += bonus ? 2 * value : value;
             currentFrameScore += value;
         } else {
             int difference = maximumFrameScore - currentFrameScore;
             score += bonus ? 2 * value : difference;
             currentFrameScore += difference;
-        }
-
-    }
-
-    private void handleDoubleStrike(int value) {
-        if(doubleStrike) {
-            score += value;
-            doubleStrike = false;
         }
     }
 
@@ -94,8 +94,11 @@ public class Game {
             actualBonusCount++;
     }
 
-    private boolean rollIsDisallowed() {
-        return frames >= MAXIMUM_FRAMES || actualRolls >= expectedRolls;
+    private void calculateDoubleStrike(int value) {
+        if(doubleStrike) {
+            score += value;
+            doubleStrike = false;
+        }
     }
 
 }
