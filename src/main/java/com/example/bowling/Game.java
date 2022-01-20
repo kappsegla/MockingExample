@@ -18,14 +18,23 @@ public class Game {
     public int score() {
         return score;
     }
-    
+
     public void roll(int value) {
         if(rollIsDisallowed())
            return;
 
-        calculateScore(value);
-        actualRolls++;
-        startNextFrame();
+        if(isStrike(value)) {
+            score += value;
+            frames++;
+        } else {
+            calculateScore(value);
+            actualRolls++;
+            startNextFrame();
+        }
+    }
+
+    private boolean isStrike(int value) {
+        return actualRolls == 0 && value == 10;
     }
 
     private void calculateScore(int value) {

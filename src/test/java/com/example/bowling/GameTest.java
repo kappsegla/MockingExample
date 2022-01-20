@@ -3,7 +3,6 @@ package com.example.bowling;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
 
@@ -47,6 +46,7 @@ class GameTest {
 
         assertThat(result).isEqualTo(10);
     }
+
     @Test
     void scoreIncreasesInMoreThanOneStandardFrame() {
         game.roll(7);
@@ -57,5 +57,16 @@ class GameTest {
 
         assertThat(result).isEqualTo(15);
     }
+
+    @Test
+    void strikeShouldGiveOneRollInAFrame() {
+        game.roll(10);  // 1st frame
+        game.roll(8);   // 2nd frame
+
+        int result = game.score();
+
+        assertThat(result).isEqualTo(18);
+    }
+
 
 }
