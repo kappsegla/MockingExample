@@ -121,4 +121,17 @@ class GameTest {
         assertThat(result).isEqualTo(95);
     }
 
+    @Test
+    void twoSparesInSuccessionShouldReturnBonuses() {
+        game.roll(2);
+        game.roll(8);
+        game.roll(4);
+        game.roll(6);
+        game.roll(5);
+
+        int result = game.score();
+
+        assertThat(result).isEqualTo(34);
+    }
+
 }
