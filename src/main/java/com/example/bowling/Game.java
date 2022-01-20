@@ -26,11 +26,7 @@ public class Game {
         if(rollIsDisallowed())
            return;
 
-        if(bonus && actualBonusCount >= maximumBonusCount) {
-            bonus = false;
-            actualBonusCount = 0;
-            maximumBonusCount = 0;
-        }
+        resetBonus();
 
         if(isStrike(value)) {
             bonus = true;
@@ -40,6 +36,14 @@ public class Game {
         } else {
             calculateScore(value);
             nextRoll();
+        }
+    }
+
+    private void resetBonus() {
+        if(bonus && actualBonusCount >= maximumBonusCount) {
+            bonus = false;
+            actualBonusCount = 0;
+            maximumBonusCount = 0;
         }
     }
 
