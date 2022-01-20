@@ -39,8 +39,7 @@ public class Game {
             frames++;
         } else {
             calculateScore(value);
-            actualRolls++;
-            next();
+            nextRoll();
         }
     }
 
@@ -61,16 +60,20 @@ public class Game {
             currentFrameScore += difference;
         }
 
-        if(bonus)
-            actualBonusCount++;
+
     }
 
-    private void next() {
+    private void nextRoll() {
+        actualRolls++;
+
         if(actualRolls == expectedRolls) {
             frames++;
             actualRolls = 0;
             currentFrameScore = 0;
         }
+
+        if(bonus)
+            actualBonusCount++;
     }
 
     private boolean rollIsDisallowed() {
