@@ -2,6 +2,11 @@ package com.example.bowling;
 
 public class Game {
 
+    /**
+     * A strike occurs when a player knocks down all 10 pins on the first roll.
+     * A spare occurs when a player kocks down all 10 pins in 2 rolls (which is in 1 frame).
+     */
+
     private int score;
     private int frames;
     private static final int MAXIMUM_FRAMES = 10;
