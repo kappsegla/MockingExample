@@ -35,6 +35,10 @@ public class Game {
         if(bonusHasBeenCalculated())
             resetBonus();
 
+        handleRoll(value);
+    }
+
+    private void handleRoll(int value) {
         if(strike(value)) {
             handleStrike(value);
         } else if (spare(value)) {
