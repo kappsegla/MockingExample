@@ -60,10 +60,26 @@ public class Game {
     }
 
     private void handleSpare(int value) {
-        bonus = true;
-        score += value;
-        maximumBonusCount = 1;
+        if(bonus) {
+            score += 2 * value;
+        } else {
+            bonus = true;
+            score += value;
+            maximumBonusCount = 1;
+        }
         nextRoll();
+    }
+
+    private void handleStrike(int value) {
+        if(bonus) {
+            doubleStrike = true;
+            score += 2 * value;
+        } else {
+            bonus = true;
+            score += value;
+        }
+        maximumBonusCount = 2;
+        frames++;
     }
 
     private boolean spare(int value) {
@@ -86,18 +102,6 @@ public class Game {
 
     private boolean strike(int value) {
         return actualRolls == 0 && value == 10;
-    }
-
-    private void handleStrike(int value) {
-        if(bonus) {
-            doubleStrike = true;
-            score += 2 * value;
-        } else {
-            bonus = true;
-            score += value;
-        }
-        maximumBonusCount = 2;
-        frames++;
     }
 
     private void calculateScore(int value) {
