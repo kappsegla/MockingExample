@@ -59,7 +59,7 @@ class GameTest {
     }
 
     @Test
-    void strikeShouldGiveOneRollInAFrame() {
+    void strikeShouldReturnOneRollInAFrame() {
         game.roll(10);  // 1st frame
         game.roll(8);   // 2nd frame
 
@@ -69,7 +69,7 @@ class GameTest {
     }
 
     @Test
-    void strikeShouldGiveBonusOfNext2RollsInNextFrame() {
+    void strikeShouldReturnBonusOfNext2RollsInNextFrame() {
         game.roll(10);
         game.roll(3);
         game.roll(3);
@@ -81,7 +81,7 @@ class GameTest {
 
 
     @Test
-    void successiveStrikesShouldGiveBonusOfNext2RollsForEachStrike() {
+    void successiveStrikesShouldReturnBonusOfNext2RollsForEachStrike() {
         game.roll(10);
         game.roll(10);
         game.roll(3);
@@ -104,7 +104,7 @@ class GameTest {
     }
 
     @Test
-    void longPlayShouldReturnCorrectScore() {
+    void strikeAfterASpareShouldReturnCorrectScore() {
         game.roll(2);
         game.roll(8);
         game.roll(4);
