@@ -79,4 +79,17 @@ class GameTest {
         assertThat(result).isEqualTo(22);
     }
 
+
+    @Test
+    void successiveStrikesShouldGiveBonusOfNext2RollsForEachStrike() {
+        game.roll(10);
+        game.roll(10);
+        game.roll(3);
+        game.roll(4);
+
+        int result = game.score();
+
+        assertThat(result).isEqualTo(47);
+    }
+
 }

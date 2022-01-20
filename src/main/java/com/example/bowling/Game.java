@@ -12,6 +12,7 @@ public class Game {
     private boolean bonus;
     private int actualBonusCount;
     private int maximumBonusCount;
+    private boolean doubleStrike;
 
     public Game() {
         expectedRolls = 2;
@@ -29,9 +30,15 @@ public class Game {
         resetBonus();
 
         if(isStrike(value)) {
-            bonus = true;
-            maximumBonusCount = 2;
-            score += value;
+            if(bonus) {
+                doubleStrike = true;
+                score += 2 * value;
+                maximumBonusCount = 3;
+            } else {
+                bonus = true;
+                score += value;
+                maximumBonusCount = 2;
+            }
             frames++;
         } else {
             calculateScore(value);
@@ -56,6 +63,7 @@ public class Game {
 //            // strike handled further up
 //        }
         if((value + currentFrameScore) < maximumFrameScore) {
+            handleDoubleStrike(value);
             score += bonus ? 2 * value : value;
             currentFrameScore += value;
         } else {
@@ -64,7 +72,13 @@ public class Game {
             currentFrameScore += difference;
         }
 
+    }
 
+    private void handleDoubleStrike(int value) {
+        if(doubleStrike) {
+            score += value;
+            doubleStrike = false;
+        }
     }
 
     private void nextRoll() {
