@@ -37,10 +37,33 @@ public class Game {
 
         if(strike(value)) {
             handleStrike(value);
+        } else if (spare(value)) {
+            handleSpare(value);
         } else {
-            calculateScore(value);
-            nextRoll();
+            handleRegularRoll(value);
         }
+    }
+
+    private void handleRegularRoll(int value) {
+        calculateScore(value);
+        incrementBonusCount();
+        nextRoll();
+    }
+
+    private void incrementBonusCount() {
+        if(bonus)
+            actualBonusCount++;
+    }
+
+    private void handleSpare(int value) {
+        bonus = true;
+        score += value;
+        maximumBonusCount = 1;
+        nextRoll();
+    }
+
+    private boolean spare(int value) {
+        return actualRolls == 1 && currentFrameScore + value == 10;
     }
 
     private boolean rollIsDisallowed() {
@@ -68,7 +91,6 @@ public class Game {
         } else {
             bonus = true;
             score += value;
-
         }
         maximumBonusCount = 2;
         frames++;
@@ -94,9 +116,6 @@ public class Game {
             actualRolls = 0;
             currentFrameScore = 0;
         }
-
-        if(bonus)
-            actualBonusCount++;
     }
 
     private void calculateDoubleStrike(int value) {

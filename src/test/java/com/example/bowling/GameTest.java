@@ -92,4 +92,15 @@ class GameTest {
         assertThat(result).isEqualTo(47);
     }
 
+    @Test
+    void spareShouldReturnBonusOfNextRoll() {
+        game.roll(7);
+        game.roll(3);
+        game.roll(4);
+
+        int result = game.score();
+
+        assertThat(result).isEqualTo(18);
+    }
+
 }
