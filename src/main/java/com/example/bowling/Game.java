@@ -9,6 +9,9 @@ public class Game {
     private int expectedRolls;
     private int currentFrameScore;
     private int maximumFrameScore;
+    private boolean bonus;
+    private int actualBonusCount;
+    private int maximumBonusCount;
 
     public Game() {
         expectedRolls = 2;
@@ -23,13 +26,21 @@ public class Game {
         if(rollIsDisallowed())
            return;
 
+        if(bonus && actualBonusCount >= maximumBonusCount) {
+            bonus = false;
+            actualBonusCount = 0;
+            maximumBonusCount = 0;
+        }
+
         if(isStrike(value)) {
+            bonus = true;
+            maximumBonusCount = 2;
             score += value;
             frames++;
         } else {
             calculateScore(value);
             actualRolls++;
-            startNextFrame();
+            next();
         }
     }
 
@@ -38,19 +49,23 @@ public class Game {
     }
 
     private void calculateScore(int value) {
-        if(currentFrameScore < maximumFrameScore) {
-            if((value + currentFrameScore) < maximumFrameScore) {
-                score += value;
-                currentFrameScore += value;
-            } else {
-                int difference = maximumFrameScore - currentFrameScore;
-                score += difference;
-                currentFrameScore += difference;
-            }
+//        if(currentFrameScore < maximumFrameScore) {
+//            // strike handled further up
+//        }
+        if((value + currentFrameScore) < maximumFrameScore) {
+            score += bonus ? 2 * value : value;
+            currentFrameScore += value;
+        } else {
+            int difference = maximumFrameScore - currentFrameScore;
+            score += bonus ? 2 * value : difference;
+            currentFrameScore += difference;
         }
+
+        if(bonus)
+            actualBonusCount++;
     }
 
-    private void startNextFrame() {
+    private void next() {
         if(actualRolls == expectedRolls) {
             frames++;
             actualRolls = 0;

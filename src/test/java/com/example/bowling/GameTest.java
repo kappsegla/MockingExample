@@ -65,8 +65,18 @@ class GameTest {
 
         int result = game.score();
 
-        assertThat(result).isEqualTo(18);
+        assertThat(result).isEqualTo(26);
     }
 
+    @Test
+    void strikeShouldGiveBonusOfNext2RollsInNextFrame() {
+        game.roll(10);
+        game.roll(3);
+        game.roll(3);
+
+        int result = game.score();
+
+        assertThat(result).isEqualTo(22);
+    }
 
 }
