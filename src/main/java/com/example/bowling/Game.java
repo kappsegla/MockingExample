@@ -18,6 +18,8 @@ public class Game {
     private int actualBonusCount;
     private int maximumBonusCount;
     private boolean doubleStrike;
+    private boolean strikeBonus;
+
 
     public Game() {
         expectedRolls = 2;
@@ -71,13 +73,15 @@ public class Game {
     }
 
     private void handleStrike(int value) {
-        if(bonus) {
+        if(strikeBonus)
             doubleStrike = true;
+        if(bonus) {
             score += 2 * value;
         } else {
             bonus = true;
             score += value;
         }
+        strikeBonus = true;
         maximumBonusCount = 2;
         frames++;
     }
@@ -96,6 +100,7 @@ public class Game {
 
     private void resetBonus() {
         bonus = false;
+        strikeBonus = false;
         actualBonusCount = 0;
         maximumBonusCount = 0;
     }
