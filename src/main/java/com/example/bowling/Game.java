@@ -83,7 +83,9 @@ public class Game {
         }
         strikeBonus = true;
         maximumBonusCount = 2;
-        frames++;
+
+        if(frames != MAXIMUM_FRAMES - 1)
+            frames++;
     }
 
     private boolean spare(int value) {
