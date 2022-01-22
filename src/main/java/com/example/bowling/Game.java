@@ -63,7 +63,7 @@ public class Game {
 
     private void handleSpare(int value) {
         if(bonusInTenthFrame()) {
-            handleSpareInTenthFrame(value);
+            handleBonusInTenthFrame(value);
         } else {
             handleRegularSpare(value);
         }
@@ -80,7 +80,7 @@ public class Game {
         nextRoll();
     }
 
-    private void handleSpareInTenthFrame(int value) {
+    private void handleBonusInTenthFrame(int value) {
         actualRolls++;
         expectedRolls = 3;
         score += value;
@@ -91,9 +91,17 @@ public class Game {
     }
 
     private void handleStrike(int value) {
-        if(strikeBonus)
+        if (bonusInTenthFrame()) {
+            handleBonusInTenthFrame(value);
+        } else {
+            regularStrike(value);
+        }
+    }
+
+    private void regularStrike(int value) {
+        if (strikeBonus)
             doubleStrike = true;
-        if(bonus) {
+        if (bonus) {
             score += 2 * value;
         } else {
             bonus = true;
@@ -101,9 +109,7 @@ public class Game {
         }
         strikeBonus = true;
         maximumBonusCount = 2;
-
-        if(frames != MAXIMUM_FRAMES - 1)
-            frames++;
+        frames++;
     }
 
     private boolean spare(int value) {

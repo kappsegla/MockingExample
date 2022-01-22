@@ -186,7 +186,7 @@ class GameTest {
 
         int result = game.score();
 
-        assertThat(result).isEqualTo(105);
+        assertThat(result).isEqualTo(100);
     }
 
     @Test
