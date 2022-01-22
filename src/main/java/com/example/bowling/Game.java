@@ -62,20 +62,32 @@ public class Game {
     }
 
     private void handleSpare(int value) {
-        if(frames == MAXIMUM_FRAMES - 1) {
-            actualRolls++;
-            expectedRolls = 3;
-            score += value;
+        if(bonusInTenthFrame()) {
+            handleSpareInTenthFrame(value);
         } else {
-            if (bonus) {
-                score += 2 * value;
-            } else {
-                bonus = true;
-                score += value;
-                maximumBonusCount = 1;
-            }
-            nextRoll();
+            handleRegularSpare(value);
         }
+    }
+
+    private void handleRegularSpare(int value) {
+        if (bonus) {
+            score += 2 * value;
+        } else {
+            bonus = true;
+            score += value;
+            maximumBonusCount = 1;
+        }
+        nextRoll();
+    }
+
+    private void handleSpareInTenthFrame(int value) {
+        actualRolls++;
+        expectedRolls = 3;
+        score += value;
+    }
+
+    private boolean bonusInTenthFrame() {
+        return frames == MAXIMUM_FRAMES - 1;
     }
 
     private void handleStrike(int value) {
