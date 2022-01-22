@@ -37,22 +37,21 @@ public class Game {
         if(bonusHasBeenCalculated())
             resetBonus();
 
-        handleRoll(value);
+        calculateScore(value);
     }
 
-    private void handleRoll(int value) {
-        if(strike(value)) {
-            handleStrike(value);
-        } else if (spare(value)) {
-            handleSpare(value);
+    private void calculateScore(int value) {
+        if(isStrike(value)) {
+            strike(value);
+        } else if (isSpare(value)) {
+            spare(value);
         } else {
-            handleRegularRoll(value);
+            regularRoll(value);
         }
     }
 
-    private void handleRegularRoll(int value) {
-        calculateScore(value);
-        incrementBonusCount();
+    private void regularRoll(int value) {
+        calculateRegularRoll(value);
         nextRoll();
     }
 
@@ -61,15 +60,15 @@ public class Game {
             actualBonusCount++;
     }
 
-    private void handleSpare(int value) {
+    private void spare(int value) {
         if(bonusInTenthFrame()) {
-            handleBonusInTenthFrame(value);
+            tenthFrameBonus(value);
         } else {
-            handleRegularSpare(value);
+            regularSpare(value);
         }
     }
 
-    private void handleRegularSpare(int value) {
+    private void regularSpare(int value) {
         if (bonus) {
             score += 2 * value;
         } else {
@@ -80,7 +79,7 @@ public class Game {
         nextRoll();
     }
 
-    private void handleBonusInTenthFrame(int value) {
+    private void tenthFrameBonus(int value) {
         actualRolls++;
         expectedRolls = 3;
         score += value;
@@ -90,9 +89,9 @@ public class Game {
         return frames == MAXIMUM_FRAMES - 1;
     }
 
-    private void handleStrike(int value) {
+    private void strike(int value) {
         if (bonusInTenthFrame()) {
-            handleBonusInTenthFrame(value);
+            tenthFrameBonus(value);
         } else {
             regularStrike(value);
         }
@@ -112,7 +111,7 @@ public class Game {
         frames++;
     }
 
-    private boolean spare(int value) {
+    private boolean isSpare(int value) {
         return actualRolls == 1 && currentFrameScore + value == 10;
     }
 
@@ -131,11 +130,11 @@ public class Game {
         maximumBonusCount = 0;
     }
 
-    private boolean strike(int value) {
+    private boolean isStrike(int value) {
         return actualRolls == 0 && value == 10;
     }
 
-    private void calculateScore(int value) {
+    private void calculateRegularRoll(int value) {
         if((value + currentFrameScore) < maximumFrameScore) {
             calculateDoubleStrike(value);
             score += bonus ? 2 * value : value;
@@ -145,6 +144,7 @@ public class Game {
             score += bonus ? 2 * value : difference;
             currentFrameScore += difference;
         }
+        incrementBonusCount();
     }
 
     private void nextRoll() {
