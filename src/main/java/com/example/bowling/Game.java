@@ -7,16 +7,16 @@ public class Game {
      * A spare occurs when a player kocks down all 10 pins in 2 rolls (which is in 1 frame).
      */
 
+    private static final int MAXIMUM_FRAMES = 10;
     private int score;
     private int frames;
-    private static final int MAXIMUM_FRAMES = 10;
     private int actualRolls;
     private int expectedRolls;
     private int currentFrameScore;
     private int maximumFrameScore;
-    private boolean bonus;
     private int actualBonusCount;
     private int maximumBonusCount;
+    private boolean bonus;
     private boolean doubleStrike;
     private boolean strikeBonus;
 
@@ -31,17 +31,17 @@ public class Game {
     }
 
     public void roll(int value) {
-        if(rollIsDisallowed())
-           return;
+        if (rollIsDisallowed())
+            return;
 
-        if(bonusHasBeenCalculated())
+        if (bonusHasBeenCalculated())
             resetBonus();
 
         calculateScore(value);
     }
 
     private void calculateScore(int value) {
-        if(isStrike(value)) {
+        if (isStrike(value)) {
             strike(value);
         } else if (isSpare(value)) {
             spare(value);
@@ -56,12 +56,12 @@ public class Game {
     }
 
     private void incrementBonusCount() {
-        if(bonus)
+        if (bonus)
             actualBonusCount++;
     }
 
     private void spare(int value) {
-        if(bonusInTenthFrame()) {
+        if (bonusInTenthFrame()) {
             tenthFrameBonus(value);
         } else {
             regularSpare(value);
@@ -135,7 +135,7 @@ public class Game {
     }
 
     private void calculateRegularRoll(int value) {
-        if((value + currentFrameScore) < maximumFrameScore) {
+        if ((value + currentFrameScore) < maximumFrameScore) {
             calculateDoubleStrike(value);
             score += bonus ? 2 * value : value;
             currentFrameScore += value;
@@ -150,7 +150,7 @@ public class Game {
     private void nextRoll() {
         actualRolls++;
 
-        if(actualRolls == expectedRolls) {
+        if (actualRolls == expectedRolls) {
             frames++;
             actualRolls = 0;
             currentFrameScore = 0;
@@ -158,7 +158,7 @@ public class Game {
     }
 
     private void calculateDoubleStrike(int value) {
-        if(doubleStrike) {
+        if (doubleStrike) {
             score += value;
             doubleStrike = false;
         }
