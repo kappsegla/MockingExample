@@ -1,11 +1,14 @@
 package com.example;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class EmployeeRepositoryInMemory implements EmployeeRepository {
-    private final List<Employee> employees = new ArrayList<>();
+
+    List<Employee> employees;
+
+    public EmployeeRepositoryInMemory(List<Employee> employees) {
+        this.employees = employees;
+    }
 
     @Override
     public List<Employee> findAll() {
@@ -14,9 +17,10 @@ public class EmployeeRepositoryInMemory implements EmployeeRepository {
 
     @Override
     public Employee save(Employee e) {
-        employees.replaceAll(employee -> e.getId().equals(employee.getId()) ? e : employee);
-    return e;
 
+        employees.removeIf(employee -> employee.getId().equals(e.getId()));
+        employees.add(e);
+        return e;
     }
 
 

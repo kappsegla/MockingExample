@@ -29,8 +29,8 @@ class EmployeeRepositoryInMemoryTest {
 
     @Test
     void employeeShouldBeReplacedByEmployeeWithSameIdButHigherSalary(){
-        Employee employee = new Employee("003",60000);
-        employeeRepositoryInMemory.save(employee);
+
+        employeeRepositoryInMemory.save(new Employee("003",60000));
 
         var newSalary = Objects.requireNonNull(employeeRepositoryInMemory.findAll().stream()
                         .filter(e -> e.getId().equals("003"))
