@@ -19,8 +19,6 @@ public class Game {
         else if (rollCounter/2-1 < frames.size())
             frames.get(rollCounter / 2 - 1).setScoreRoundTwo(pins);
 
-
-
         if(rollCounter > 20) {
             throw new IllegalArgumentException("Exceeded the maximum number of rolls in a game of bowling.");
         }
