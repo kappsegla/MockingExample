@@ -40,6 +40,16 @@ public class BowlingGameTest {
         assertEquals(35, game.score());
     }
 
+    @Test
+    void OneStrikeThenToFivesThenRestMiss(){
+        game.roll(10);
+        game.roll(5);
+        game.roll(5);
+        rollMany(16, 0);
+        assertEquals(30, game.score());
+
+    }
+
 
 
     private void rollMany(int amountOfRolls, int pins) {
