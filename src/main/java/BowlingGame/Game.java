@@ -23,13 +23,18 @@ public class Game {
     }
 
     private void prepareRoundOneScore(int pins) {
-
-        boolean previousFrameWasSpare = false;
-
-
         Frame frame = new Frame();
-        frame.setScoreRoundOne(pins,previousFrameWasSpare);
-        frames.add(frame);
+
+        if(frames.size() > 0) {
+            Frame previousFrame = frames.get(frames.size()-1);
+            boolean previousFrameWasSpare = previousFrame.getScoreRoundOne() + previousFrame.getScoreRoundTwo() == 10;
+            frame.setScoreRoundOne(pins,previousFrameWasSpare);
+            frames.add(frame);
+        } else {
+
+            frame.setScoreRoundOne(pins,false);
+            frames.add(frame);
+        }
     }
 
     public int score() {
