@@ -39,7 +39,6 @@ public class BowlingGameTest {
         rollMany(15, 0);
         assertEquals(35, game.score());
     }
-
     @Test
     void OneStrikeThenToFivesThenRestMiss(){
         game.roll(10);
@@ -49,7 +48,6 @@ public class BowlingGameTest {
         assertEquals(30, game.score());
 
     }
-
 
 
     private void rollMany(int amountOfRolls, int pins) {

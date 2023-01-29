@@ -4,6 +4,7 @@ public class Frame {
 
 
     private boolean isSpare;
+    private boolean isStrike;
     private int scoreRoundOne;
     private int scoreRoundTwo;
     private int roundOnePins;
@@ -44,9 +45,9 @@ public class Frame {
         return scoreRoundOne;
     }
 
-    public void setScoreRoundOne(int scoreRoundOne, boolean previousFrameWasSpare) {
+    public void setScoreRoundOne(int scoreRoundOne, boolean previousFrameWasSpareOrStrike) {
 
-        if (previousFrameWasSpare)
+        if (previousFrameWasSpareOrStrike)
             this.scoreRoundOne = scoreRoundOne*2;
         else
             this.scoreRoundOne = scoreRoundOne;
@@ -57,8 +58,11 @@ public class Frame {
         return scoreRoundTwo;
     }
 
-    public void setScoreRoundTwo(int scoreRoundTwo) {
-        this.scoreRoundTwo = scoreRoundTwo;
+    public void setScoreRoundTwo(int scoreRoundTwo, boolean previousFrameWasStrike) {
+        if (previousFrameWasStrike)
+            this.scoreRoundTwo = scoreRoundTwo*2;
+        else
+            this.scoreRoundTwo = scoreRoundTwo;
     }
 
 
@@ -68,6 +72,11 @@ public class Frame {
     }
 
 
+    public boolean isStrike() {
+        return isStrike;
+    }
 
-
+    public void setStrike(boolean strike) {
+        isStrike = strike;
+    }
 }
