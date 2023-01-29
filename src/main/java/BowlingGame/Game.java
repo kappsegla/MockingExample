@@ -7,7 +7,11 @@ public class Game {
 
     private int rollCounter;
 
-    private final List<Frame> frames = new ArrayList<>();
+    public Game(List<Frame> frames) {
+        this.frames = frames;
+    }
+
+    List<Frame> frames;
 
     public void roll(int pins) {
         rollCounter++;

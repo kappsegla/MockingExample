@@ -1,13 +1,21 @@
 package com.example;
 
 
+import BowlingGame.Frame;
 import BowlingGame.Game;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BowlingGameTest {
 
-    Game game = new Game();
+    List<Frame> frames;
+    Game game = new Game(frames = new ArrayList<>());
+
+
 
     @Test
     public void fullGameOffMissedRolls(){
@@ -39,6 +47,17 @@ public class BowlingGameTest {
         rollMany(15, 0);
         assertEquals(35, game.score());
     }
+
+    @Test
+    void framesShouldHaveCorrectSizeAfterStrikeAndOneExtraRoll(){
+        //Second roll should add and create one extra frame.
+        game.roll(10);
+        game.roll(1);
+        frames.size();
+        assertEquals(2,frames.size());
+
+    }
+
     @Test
     void OneStrikeThenToFivesThenRestMiss(){
         game.roll(10);
@@ -54,6 +73,4 @@ public class BowlingGameTest {
         for (int i = 0; i < amountOfRolls; i++)
             game.roll(pins);
     }
-
-
 }
