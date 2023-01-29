@@ -12,9 +12,7 @@ public class Game {
     public void roll(int pins) {
         rollCounter++;
         if (rollCounter % 2 == 1) {
-            Frame frame = new Frame();
-            frame.setScoreRoundOne(pins);
-            frames.add(frame);
+            prepareRoundOneScore(pins);
         }
         else if (rollCounter/2-1 < frames.size())
             frames.get(rollCounter / 2 - 1).setScoreRoundTwo(pins);
@@ -22,6 +20,16 @@ public class Game {
         if(rollCounter > 20) {
             throw new IllegalArgumentException("Exceeded the maximum number of rolls in a game of bowling.");
         }
+    }
+
+    private void prepareRoundOneScore(int pins) {
+
+        boolean previousFrameWasSpare = false;
+
+
+        Frame frame = new Frame();
+        frame.setScoreRoundOne(pins,previousFrameWasSpare);
+        frames.add(frame);
     }
 
     public int score() {
