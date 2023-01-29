@@ -3,7 +3,6 @@ package com.example;
 
 import BowlingGame.Game;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BowlingGameTest {
@@ -28,9 +27,20 @@ public class BowlingGameTest {
         game.roll(5);
         rollMany(17, 0);
         assertEquals(20,game.score());
-
-
     }
+
+    @Test
+    void fullGameWithTwoSparesThenFiveThenRestMiss() {
+        game.roll(5);
+        game.roll(5);
+        game.roll(5);
+        game.roll(5);
+        game.roll(5);
+        rollMany(15, 0);
+        assertEquals(35, game.score());
+    }
+
+
 
     private void rollMany(int amountOfRolls, int pins) {
         for (int i = 0; i < amountOfRolls; i++)
