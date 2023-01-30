@@ -53,7 +53,6 @@ public class BowlingGameTest {
         //Second roll should add and create one extra frame.
         game.roll(10);
         game.roll(1);
-        frames.size();
         assertEquals(2,frames.size());
 
     }
@@ -64,8 +63,9 @@ public class BowlingGameTest {
         game.roll(5);
         game.roll(5);
         rollMany(16, 0);
-        assertEquals(30, game.score());
-
+       //assertEquals(10, frames.get(0).getTotalScore());
+     //  assertEquals(true, frames.get(0).isStrike());
+       assertEquals(30, game.score());
     }
 
 

@@ -2,6 +2,17 @@ package BowlingGame;
 
 public class Frame {
 
+    @Override
+    public String toString() {
+        return "Frame{" +
+                "isSpare=" + isSpare +
+                ", isStrike=" + isStrike +
+                ", scoreRoundOne=" + scoreRoundOne +
+                ", scoreRoundTwo=" + scoreRoundTwo +
+                ", roundOnePins=" + roundOnePins +
+                ", roundTwoPins=" + roundTwoPins +
+                '}';
+    }
 
     private boolean isSpare;
     private boolean isStrike;
