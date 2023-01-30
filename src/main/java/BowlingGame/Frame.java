@@ -1,7 +1,6 @@
 package BowlingGame;
 
 public class Frame {
-
     @Override
     public String toString() {
         return "Frame{" +
@@ -10,6 +9,7 @@ public class Frame {
                 ", scoreRoundOne=" + scoreRoundOne +
                 ", scoreRoundTwo=" + scoreRoundTwo +
                 ", roundOnePins=" + roundOnePins +
+                ", extraRoll=" + extraRoll +
                 ", roundTwoPins=" + roundTwoPins +
                 '}';
     }
@@ -19,6 +19,7 @@ public class Frame {
     private int scoreRoundOne;
     private int scoreRoundTwo;
     private int roundOnePins;
+    private int extraRoll;
 
 
     public int getRoundOnePins() {
@@ -70,7 +71,7 @@ public class Frame {
 
 
     public int getTotalScore() {
-        return scoreRoundOne+scoreRoundTwo;
+        return scoreRoundOne+scoreRoundTwo+extraRoll;
     }
 
 
@@ -82,6 +83,11 @@ public class Frame {
         isStrike = strike;
     }
 
-    public void setScore(int i) {
+    public int getExtraRoll() {
+        return extraRoll;
+    }
+
+    public void setExtraRoll(int extraRoll) {
+        this.extraRoll = extraRoll;
     }
 }

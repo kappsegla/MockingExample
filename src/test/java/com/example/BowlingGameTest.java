@@ -71,9 +71,9 @@ public class BowlingGameTest {
         game.roll(10);
         game.roll(5);
         game.roll(0);
-        System.out.println(frames.get(0));
-        System.out.println(frames.get(1));
-        System.out.println(frames.get(2));
+//        System.out.println(frames.get(0));
+//        System.out.println(frames.get(1));
+//        System.out.println(frames.get(2));
         rollMany(13, 0);
         assertEquals(45, game.score());
     }
@@ -88,6 +88,7 @@ public class BowlingGameTest {
     @Test
     public void PerfectGame(){
         rollMany(12,10);
+
         assertEquals(300, game.score());
     }
 
@@ -107,10 +108,10 @@ public class BowlingGameTest {
         game.roll(10);
         game.roll(5);
         game.roll(5);
-        System.out.println(frames.get(0));
-        System.out.println(frames.get(1));
-        System.out.println(frames.get(2));
-        System.out.println(frames.get(3));
+//        System.out.println(frames.get(0));
+//        System.out.println(frames.get(1));
+//        System.out.println(frames.get(2));
+//        System.out.println(frames.get(3));
 
         rollMany(12, 0);
         assertEquals(85, game.score());

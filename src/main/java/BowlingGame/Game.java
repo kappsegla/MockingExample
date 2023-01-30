@@ -29,31 +29,43 @@ public class Game {
     }
 
     private void prepareRoundOneResult(int pins) {
+
+
         Frame frame = new Frame();
         frame.setStrike(pins == 10);
         frame.setRoundOnePins(pins);
         frame.setScoreRoundOne(pins);
 
-        if (frames.size() > 0) {
-            Frame previousFrame = frames.get(frames.size() - 1);
-            int previousFrameRoundTwoOldScore = previousFrame.getScoreRoundTwo();
+        if (!bonusShot(pins)) {
+            if (frames.size() > 0) {
+                Frame previousFrame = frames.get(frames.size() - 1);
+                int previousFrameRoundTwoOldScore = previousFrame.getScoreRoundTwo();
 
-            if (previousFrame.isStrike())
-                previousFrame.setScoreRoundOne(10 + pins);
+                if (previousFrame.isStrike())
+                    previousFrame.setScoreRoundOne(10 + pins);
 
-            else if (previousFrame.isSpare()) {
-                previousFrame.setScoreRoundTwo(previousFrameRoundTwoOldScore + pins);
+                else if (previousFrame.isSpare()) {
+                    previousFrame.setScoreRoundTwo(previousFrameRoundTwoOldScore + pins);
+                }
             }
+
+            updateOldFrameWhenTwoStrikesInRow(pins);
+            frames.add(frame);
+
+            if (pins == 10 && frames.size() != 10)
+                rollCounter = 0;
         }
+    }
 
-        updateOldFrameWhenTwoStrikesInRow(pins);
+    private boolean bonusShot(int pins) {
 
+        if (frames.size() == 10)
+            if (frames.get(9).isSpare() || frames.get(9).isStrike()) {
+                frames.get(9).setExtraRoll(pins);
+                return true;
+            }
 
-        frames.add(frame);
-
-        if(pins == 10)
-            rollCounter = 0;
-
+        return false;
     }
 
     private void updateOldFrameWhenTwoStrikesInRow(int pins) {
@@ -97,9 +109,7 @@ public class Game {
 
 
     public int score() {
+
         return frames.stream().mapToInt(Frame::getTotalScore).sum();
     }
-
-
-
 }
