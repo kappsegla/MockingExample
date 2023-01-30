@@ -53,12 +53,9 @@ public class Frame {
         return scoreRoundOne;
     }
 
-    public void setScoreRoundOne(int scoreRoundOne, boolean previousFrameWasSpareOrStrike) {
+    public void setScoreRoundOne(int scoreRoundOne) {
 
-        if (previousFrameWasSpareOrStrike)
-            this.scoreRoundOne = scoreRoundOne*2;
-        else
-            this.scoreRoundOne = scoreRoundOne;
+        this.scoreRoundOne = scoreRoundOne;
 
     }
 
@@ -66,11 +63,8 @@ public class Frame {
         return scoreRoundTwo;
     }
 
-    public void setScoreRoundTwo(int scoreRoundTwo, boolean previousFrameWasStrike) {
-        if (previousFrameWasStrike)
-            this.scoreRoundTwo = scoreRoundTwo*2;
-        else
-            this.scoreRoundTwo = scoreRoundTwo;
+    public void setScoreRoundTwo(int scoreRoundTwo) {
+        this.scoreRoundTwo = scoreRoundTwo;
     }
 
 

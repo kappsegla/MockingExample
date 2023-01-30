@@ -1,6 +1,6 @@
 package BowlingGame;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -30,26 +30,27 @@ public class Game {
     }
 
     private void prepareRoundOneResult(int pins) {
-
-
         Frame frame = new Frame();
         frame.setStrike(pins == 10);
         frame.setRoundOnePins(pins);
+        frame.setScoreRoundOne(pins);
 
-        if(frames.size() > 0) {
+        if (frames.size() > 0) {
+            Frame previousFrame = frames.get(frames.size() - 1);
+            int previousFrameRoundTwoOldScore = previousFrame.getScoreRoundTwo();
 
-            Frame previousFrame = frames.get(frames.size()-1);
-            boolean previousFrameWasStrikeOrSpare = previousFrameWasStrikeOrSpare(previousFrame);
-            frame.setScoreRoundOne(pins,previousFrameWasStrikeOrSpare);
-            frames.add(frame);
+            if (previousFrame.isStrike())
+                previousFrame.setScoreRoundTwo(10 + pins);
+
+            else if (previousFrame.isSpare()) {
+                previousFrame.setScoreRoundTwo(previousFrameRoundTwoOldScore + pins);
+            }
         }
-        else {
-            frame.setRoundOnePins(pins);
-            frame.setScoreRoundOne(pins,false);
-            frames.add(frame);
-        }
+        frames.add(frame);
+
         if(pins == 10)
             rollCounter = 0;
+
 
     }
 
@@ -65,26 +66,34 @@ public class Game {
 
         }
 
+        if (frames.size() > 1 && frames.get(correctIndex-1).isStrike())
+            frames.get(correctIndex-1).setScoreRoundOne(10+pins);
+
+
+
         int roundTotalPins = frames.get(correctIndex).getRoundOnePins() + pins;
-        boolean isSpare = roundTotalPins >= 10;
+        boolean isSpare = roundTotalPins == 10;
 
 
         frames.get(correctIndex).setRoundTwoPins(pins);
         frames.get(correctIndex).setSpare(isSpare);
-        frames.get(correctIndex).setScoreRoundTwo(pins, previousFrameWasStrike);
+        frames.get(correctIndex).setScoreRoundTwo(pins);
     }
 
 
 
-    private boolean previousFrameWasStrikeOrSpare(Frame previousFrame) {
-        boolean previousFrameWasStrike = previousFrame.isStrike();
-        boolean previousFrameWasSpare = previousFrame.isSpare();
-        return previousFrameWasStrike || previousFrameWasSpare;
-
-    }
+//    private boolean previousFrameWasStrikeOrSpare(Frame previousFrame) {
+//        boolean previousFrameWasStrike = previousFrame.isStrike();
+//        boolean previousFrameWasSpare = previousFrame.isSpare();
+//        return previousFrameWasStrike || previousFrameWasSpare;
+//
+//    }
 
     public int score() {
-        return frames.stream().mapToInt(Frame::getTotalScore).sum();
+        int i = frames.stream().mapToInt(Frame::getScoreRoundTwo).sum()+
+                frames.stream().mapToInt(Frame::getScoreRoundOne).sum();
+
+        return i;
     }
 
 

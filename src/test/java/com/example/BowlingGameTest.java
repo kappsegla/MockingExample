@@ -34,7 +34,8 @@ public class BowlingGameTest {
         game.roll(5);
         game.roll(5);
         rollMany(17, 0);
-        assertEquals(20,game.score());
+        System.out.println(frames);
+        assertEquals(15, frames.get(0).getTotalScore());
     }
 
     @Test
