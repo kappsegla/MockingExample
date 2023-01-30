@@ -20,9 +20,6 @@ public class Frame {
     private int scoreRoundTwo;
     private int roundOnePins;
 
-    public void setScoreRoundOne(int scoreRoundOne) {
-        this.scoreRoundOne = scoreRoundOne;
-    }
 
     public int getRoundOnePins() {
         return roundOnePins;

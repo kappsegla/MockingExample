@@ -1,6 +1,6 @@
 package BowlingGame;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Game {
@@ -15,16 +15,17 @@ public class Game {
 
     public void roll(int pins) {
         rollCounter++;
-        if (rollCounter % 2 == 1) {
+        if (rollCounter == 1) {
             prepareRoundOneResult(pins);
+
         }
-        else if (rollCounter/2-1 < frames.size()) {
+        else if (rollCounter == 2) {
             prepareRoundTwoResult(pins);
-
+            rollCounter = 0;
         }
 
-        if(rollCounter > 20) {
-            throw new IllegalArgumentException("Exceeded the maximum number of rolls in a game of bowling.");
+        if(frames.size() > 10) {
+           throw new IllegalArgumentException("Exceeded the maximum number of rolls in a game of bowling.");
         }
     }
 
@@ -48,7 +49,7 @@ public class Game {
             frames.add(frame);
         }
         if(pins == 10)
-            rollCounter++;
+            rollCounter = 0;
 
     }
 

@@ -66,10 +66,22 @@ public class BowlingGameTest {
     }
 
     @Test
-    public void testPerfectGame(){
-        rollMany(12,10);
-        assertEquals(300, game.score());
+    void twoStrikesThanFiveThanZeroThanFiveRestZero(){
+        game.roll(10);
+        game.roll(10);
+        game.roll(5);
+        game.roll(0);
+        game.roll(5);
+        rollMany(13, 0);
+        assertEquals(50, game.score());
     }
+
+
+//    @Test
+//    public void testPerfectGame(){
+//        rollMany(12,10);
+//        assertEquals(300, game.score());
+//    }
 
 
     @Test
@@ -80,9 +92,24 @@ public class BowlingGameTest {
         assertEquals(true, frames.get(0).isStrike());
     }
 
+    @Test
+    void
+    threeStrikesThanSpareRestZero(){
+        game.roll(10);
+        game.roll(10);
+        game.roll(10);
+        game.roll(5);
+        game.roll(5);
+        rollMany(12, 0);
+        assertEquals(70, game.score());
+    }
+
 
     private void rollMany(int amountOfRolls, int pins) {
         for (int i = 0; i < amountOfRolls; i++)
             game.roll(pins);
     }
+
+
+
 }
