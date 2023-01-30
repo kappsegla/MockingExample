@@ -40,7 +40,6 @@ public class Game {
             Frame previousFrame = frames.get(frames.size()-1);
             boolean previousFrameWasStrikeOrSpare = previousFrameWasStrikeOrSpare(previousFrame);
             frame.setScoreRoundOne(pins,previousFrameWasStrikeOrSpare);
-         //   System.out.println(previousFrame);
             frames.add(frame);
         }
         else {

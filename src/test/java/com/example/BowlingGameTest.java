@@ -50,7 +50,6 @@ public class BowlingGameTest {
 
     @Test
     void framesShouldHaveCorrectSizeAfterStrikeAndOneExtraRoll(){
-        //Second roll should add and create one extra frame.
         game.roll(10);
         game.roll(1);
         assertEquals(2,frames.size());
@@ -58,14 +57,27 @@ public class BowlingGameTest {
     }
 
     @Test
-    void OneStrikeThenToFivesThenRestMiss(){
+    void oneStrikeThenToFivesThenRestMiss(){
         game.roll(10);
         game.roll(5);
         game.roll(5);
         rollMany(16, 0);
-       //assertEquals(10, frames.get(0).getTotalScore());
-     //  assertEquals(true, frames.get(0).isStrike());
        assertEquals(30, game.score());
+    }
+
+    @Test
+    public void testPerfectGame(){
+        rollMany(12,10);
+        assertEquals(300, game.score());
+    }
+
+
+    @Test
+    void
+    oneStrikeShouldMarkFrameAsStrike(){
+        game.roll(10);
+        rollMany(16, 0);
+        assertEquals(true, frames.get(0).isStrike());
     }
 
 
