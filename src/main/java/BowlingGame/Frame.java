@@ -20,6 +20,8 @@ public class Frame {
     private int scoreRoundTwo;
     private int roundOnePins;
     private int extraRoll;
+    private int roundTwoPins;
+    private int roundPins;
 
 
     public int getRoundOnePins() {
@@ -38,7 +40,7 @@ public class Frame {
         this.roundTwoPins = roundTwoPins;
     }
 
-    private int roundTwoPins;
+
 
     public boolean isSpare() {
         return isSpare;
@@ -90,4 +92,8 @@ public class Frame {
     public void setExtraRoll(int extraRoll) {
         this.extraRoll = extraRoll;
     }
+
+
+
+
 }

@@ -1,6 +1,4 @@
 package com.example;
-
-
 import BowlingGame.Frame;
 import BowlingGame.Game;
 import org.junit.jupiter.api.Test;
@@ -8,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BowlingGameTest {
 
@@ -71,9 +71,7 @@ public class BowlingGameTest {
         game.roll(10);
         game.roll(5);
         game.roll(0);
-//        System.out.println(frames.get(0));
-//        System.out.println(frames.get(1));
-//        System.out.println(frames.get(2));
+//        framesToString();
         rollMany(13, 0);
         assertEquals(45, game.score());
     }
@@ -88,6 +86,7 @@ public class BowlingGameTest {
     @Test
     public void PerfectGame(){
         rollMany(12,10);
+        framesToString();
 
         assertEquals(300, game.score());
     }
@@ -97,7 +96,7 @@ public class BowlingGameTest {
     oneStrikeShouldMarkFrameAsStrike(){
         game.roll(10);
         rollMany(16, 0);
-        assertEquals(true, frames.get(0).isStrike());
+        assertTrue(frames.get(0).isStrike());
     }
 
     @Test
@@ -108,10 +107,7 @@ public class BowlingGameTest {
         game.roll(10);
         game.roll(5);
         game.roll(5);
-//        System.out.println(frames.get(0));
-//        System.out.println(frames.get(1));
-//        System.out.println(frames.get(2));
-//        System.out.println(frames.get(3));
+//      framesToString();
 
         rollMany(12, 0);
         assertEquals(85, game.score());
@@ -123,6 +119,23 @@ public class BowlingGameTest {
             game.roll(pins);
     }
 
+    @Test
+    void framesNineStrikesFiveFiveFiveShouldReturn270(){
+        rollMany(9,10);
+        game.roll(5);
+        game.roll(5);
+        game.roll(5);
+
+
+        assertEquals(270,game.score());
+
+    }
+
+    private void framesToString() {
+        for (Frame frame : frames) {
+            System.out.println(frame.toString());
+        }
+    }
 
 
 }
