@@ -81,4 +81,7 @@ public class Frame {
     public void setStrike(boolean strike) {
         isStrike = strike;
     }
+
+    public void setScore(int i) {
+    }
 }

@@ -1,6 +1,5 @@
-package BowlingGame;
 
-import java.util.ArrayList;
+package BowlingGame;
 import java.util.List;
 
 public class Game {
@@ -25,7 +24,7 @@ public class Game {
         }
 
         if(frames.size() > 10) {
-           throw new IllegalArgumentException("Exceeded the maximum number of rolls in a game of bowling.");
+            throw new IllegalArgumentException("Exceeded the maximum number of rolls in a game of bowling.");
         }
     }
 
@@ -40,18 +39,35 @@ public class Game {
             int previousFrameRoundTwoOldScore = previousFrame.getScoreRoundTwo();
 
             if (previousFrame.isStrike())
-                previousFrame.setScoreRoundTwo(10 + pins);
+                previousFrame.setScoreRoundOne(10 + pins);
 
             else if (previousFrame.isSpare()) {
                 previousFrame.setScoreRoundTwo(previousFrameRoundTwoOldScore + pins);
             }
         }
+
+        updateOldFrameWhenTwoStrikesInRow(pins);
+
+
         frames.add(frame);
 
         if(pins == 10)
             rollCounter = 0;
 
+    }
 
+    private void updateOldFrameWhenTwoStrikesInRow(int pins) {
+        if (frames.size() > 1) {
+
+            Frame previousFrame = frames.get(frames.size() - 1);
+            Frame previousSecondFrame = frames.get(frames.size() - 2);
+
+
+            if (previousSecondFrame.isStrike() && previousFrame.isStrike()) {
+                int temp = frames.get(frames.size()-2).getScoreRoundOne();
+                frames.get(frames.size() - 2).setScoreRoundOne(temp + pins);
+            }
+        }
     }
 
 
@@ -63,11 +79,10 @@ public class Game {
         if (frames.size() > 1) {
             previousFrame = frames.get(frames.size()-2);
             previousFrameWasStrike = previousFrame.isStrike();
-
         }
 
-        if (frames.size() > 1 && frames.get(correctIndex-1).isStrike())
-            frames.get(correctIndex-1).setScoreRoundOne(10+pins);
+        if (previousFrameWasStrike)
+            frames.get(correctIndex-1).setScoreRoundTwo(pins);
 
 
 
@@ -81,20 +96,10 @@ public class Game {
     }
 
 
-
-//    private boolean previousFrameWasStrikeOrSpare(Frame previousFrame) {
-//        boolean previousFrameWasStrike = previousFrame.isStrike();
-//        boolean previousFrameWasSpare = previousFrame.isSpare();
-//        return previousFrameWasStrike || previousFrameWasSpare;
-//
-//    }
-
     public int score() {
-        int i = frames.stream().mapToInt(Frame::getScoreRoundTwo).sum()+
-                frames.stream().mapToInt(Frame::getScoreRoundOne).sum();
-
-        return i;
+        return frames.stream().mapToInt(Frame::getTotalScore).sum();
     }
+
 
 
 }
