@@ -1,3 +1,4 @@
+
 package BowlingGame;
 import java.util.List;
 
@@ -25,9 +26,6 @@ public class Game {
         if(frames.size() > 10) {
             throw new IllegalArgumentException("Exceeded the maximum number of rolls in a game of bowling.");
         }
-        if(pins > 10) {
-            throw new IllegalArgumentException("Exceeded number of pins possible in a round.");
-        }
     }
 
     private void prepareRoundOneResult(int pins) {
@@ -37,7 +35,6 @@ public class Game {
         frame.setStrike(pins == 10);
         frame.setRoundOnePins(pins);
         frame.setScoreRoundOne(pins);
-
 
         if (!bonusShot(pins)) {
             if (frames.size() > 0) {
