@@ -25,7 +25,7 @@ class EmployeesTest {
     @Test
     void PaidEmployeesWithOutIncrement() {
 
-        //doThrow(RuntimeException.class).when(bankService).pay("0", 0.0);
+        doThrow(RuntimeException.class).when(bankService).pay("0", 0.0);
         int unIncremented = employees.payEmployees();
         assertEquals(3, unIncremented);
 
@@ -46,8 +46,7 @@ class EmployeesTest {
 
         doThrow(RuntimeException.class).when(bankService).pay(" ", 0);
         employees.payEmployees();
-        boolean actual;
-        actual = employeeRepository.findAll().get(0).isPaid();
+        boolean actual = employeeRepository.findAll().get(0).isPaid();
         assertTrue(actual, "0");
     }
 
@@ -56,8 +55,8 @@ class EmployeesTest {
         employeeRepository.employees.get(0).setPaid(true);
         doThrow(RuntimeException.class).when(bankService).pay(" ", 0);
         employees.payEmployees();
-
-        assertTrue(employeeRepository.findAll().get(0).isPaid());
+        boolean actual = employeeRepository.findAll().get(0).isPaid();
+        assertTrue(actual,"0");
     }
 
 }
