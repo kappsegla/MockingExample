@@ -59,4 +59,7 @@ class EmployeesTest {
         assertTrue(actual,"0");
     }
 
+    @Test
+    void payEmployees() {
+    }
 }
