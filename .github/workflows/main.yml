@@ -1,6 +1,6 @@
 name: Java CI/CD
 
-on: []
+on: workflow_run
 
 jobs:
   build:
