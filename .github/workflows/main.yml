@@ -1,4 +1,4 @@
-name: Java CI/CD
+name: Java CI
 
 on: workflow_run
 
