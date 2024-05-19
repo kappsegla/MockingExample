@@ -42,4 +42,11 @@ public class CalculatorTest {
         int result = calculator.add("1,2\n3");
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("Test with delimiter set to ;")
+    void testWithDelimiterSetTo() {
+        int result = calculator.add("//;\n1,2\n3");
+        assertThat(result).isEqualTo(6);
+    }
 }
