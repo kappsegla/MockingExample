@@ -55,4 +55,11 @@ public class CalculatorTest {
     void testNegativeThrowsException() {
         assertThrows(IllegalArgumentException.class, () -> calculator.add("-1,2\n-3"));
     }
+    @Test
+    @DisplayName("Test 1001 counts as 0")
+    void test1001CountsAsZero () {
+        int result = calculator.add("1001,2\n3");
+        assertThat(result).isEqualTo(5);
+    }
+
 }

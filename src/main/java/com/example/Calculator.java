@@ -27,7 +27,8 @@ public class Calculator {
                     if (i<0){
                         throw new IllegalArgumentException("Negatives not allowed "+ i);
                     }
-                    result = result + Integer.parseInt(subPart);
+                    if (i<1001)result = result + Integer.parseInt(subPart);
+
                 }
 
             } catch (NumberFormatException e) {
