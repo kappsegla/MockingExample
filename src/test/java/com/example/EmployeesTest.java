@@ -41,7 +41,7 @@ public class EmployeesTest {
     void testPayEmployeesReturns3WhenPaying3Employees(){
         Employees employees = new Employees(employeeRepository, bankService);
         var result = employees.payEmployees();
-        assertEquals(result,3);
+        assertThat(result).isEqualTo(3);
     }
 
     @Test
@@ -50,7 +50,6 @@ public class EmployeesTest {
         Employees employees = new Employees(employeeRepository,null);
         employeeRepository.findAll().forEach(e -> e.setPaid(true));
         var result = employees.payEmployees();
-
         assertThat(result).isZero();
     }
 }
