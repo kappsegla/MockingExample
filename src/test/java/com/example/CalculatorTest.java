@@ -49,4 +49,10 @@ public class CalculatorTest {
         int result = calculator.add("//,\n1,2\n3");
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("Test negative throws exception")
+    void testNegativeThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> calculator.add("-1,2\n-3"));
+    }
 }

@@ -23,6 +23,10 @@ public class Calculator {
             try {
                 String[] subParts = part.split(delimiter);
                 for (String subPart : subParts) {
+                    int i = Integer.parseInt(subPart);
+                    if (i<0){
+                        throw new IllegalArgumentException("Negatives not allowed "+ i);
+                    }
                     result = result + Integer.parseInt(subPart);
                 }
 
