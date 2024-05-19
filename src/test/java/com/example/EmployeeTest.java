@@ -3,6 +3,7 @@ package com.example;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 class EmployeeTest {
@@ -54,5 +55,13 @@ class EmployeeTest {
         employee.setPaid(true);
         assertTrue(employee.isPaid());
     }
+
+    @Test
+    @DisplayName("toString returns appropriate string")
+    void toStringReturnsRightString(){
+
+        assertTrue(employee.toString().equals("Employee [id=" + employee.getId() + ", salary=" + employee.getSalary() + "]"));
+    }
+
 
 }
