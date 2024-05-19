@@ -1,11 +1,12 @@
 package com.example;
 
+
 public class Calculator {
 
 
-    static int add(String numbers){
+    static int add(String numbers) {
         int result = 0;
-        String [] parts;
+        String[] parts;
         if (numbers.isEmpty())
             return result;
         String delimiter = ",";
@@ -13,16 +14,16 @@ public class Calculator {
         parts = numbers.split("[\n]+");
 
 
-        if (parts[0].startsWith("//")){
-            delimiter= parts[0].substring(2);
-            parts[0] = null;
+        if (numbers.startsWith("//")) {
+            delimiter = parts[0].substring(2);
+            parts = shift(parts);
         }
 
-        for (String part : parts){
+        for (String part : parts) {
             try {
-                String [] subParts = part.split(delimiter);
-                for (String subPart : subParts){
-                    result = result + Integer.parseInt(part);
+                String[] subParts = part.split(delimiter);
+                for (String subPart : subParts) {
+                    result = result + Integer.parseInt(subPart);
                 }
 
             } catch (NumberFormatException e) {
@@ -30,6 +31,15 @@ public class Calculator {
             }
         }
 
+        return result;
+    }
+
+
+    private static String[] shift(String[] array) {
+        String[] result = new String[array.length - 1];
+        for (int i = 1; i < array.length; i++) {
+            result[i - 1] = array[i];
+        }
         return result;
     }
 }
