@@ -15,7 +15,16 @@ public class Calculator {
 
 
         if (numbers.startsWith("//")) {
+            delimiter = "";
+            String [] subParts = parts[0].split("[\\]\\[]+");
+            for (String subPart : subParts){
+                //delimiter.
+            }//split delimiter into parts. String concatenation. "+var1+"
+            // "[0-9]{" + minValue + "," + maxValue + "}"
+
             delimiter = parts[0].substring(2);
+
+
             parts = shift(parts);
         }
 
@@ -30,15 +39,12 @@ public class Calculator {
                     if (i<1001)result = result + Integer.parseInt(subPart);
 
                 }
-
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException(e);
             }
         }
-
         return result;
     }
-
 
     private static String[] shift(String[] array) {
         String[] result = new String[array.length - 1];

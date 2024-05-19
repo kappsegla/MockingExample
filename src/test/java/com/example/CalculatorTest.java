@@ -66,6 +66,13 @@ public class CalculatorTest {
     @DisplayName("Test asda works as delimiter")
     void testAsdaWorksAsDelimiter(){
         int result = calculator.add("//asda\n1asda2\n3");
+        assertThat(result).isEqualTo(6);
+    }
+    @Test
+    @DisplayName("Testing da brackets")
+    void testingDaBrackets(){
+        int result = calculator.add("//[asda][sws]\n1asda2sws3");
+        assertThat(result).isEqualTo(6);
     }
 
 }
