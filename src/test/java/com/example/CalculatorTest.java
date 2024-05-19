@@ -35,4 +35,11 @@ public class CalculatorTest {
     void testBadStringThrowsException() {
         assertThrows(IllegalArgumentException.class, () -> calculator.add("a"));
     }
+
+    @Test
+    @DisplayName("Test 6 total with newline returns 6")
+    void test6TotalWithNewlineReturns6() {
+        int result = calculator.add("1,2\n3");
+        assertThat(result).isEqualTo(6);
+    }
 }

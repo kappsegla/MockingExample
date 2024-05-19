@@ -9,7 +9,7 @@ public class Calculator {
         if (numbers.equals(""))
             return result;
         else {
-            parts = numbers.split(",");
+            parts = numbers.split(",\n");
             for (String part : parts){
                 try {
                     result = result + Integer.parseInt(part);
