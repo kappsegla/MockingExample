@@ -46,7 +46,7 @@ public class CalculatorTest {
     @Test
     @DisplayName("Test with delimiter set to ;")
     void testWithDelimiterSetTo() {
-        int result = calculator.add("//,\n1,2\n3");
+        int result = calculator.add("//;\n1;2\n3");
         assertThat(result).isEqualTo(6);
     }
 
@@ -60,6 +60,12 @@ public class CalculatorTest {
     void test1001CountsAsZero () {
         int result = calculator.add("1001,2\n3");
         assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("Test asda works as delimiter")
+    void testAsdaWorksAsDelimiter(){
+        int result = calculator.add("//asda\n1asda2\n3");
     }
 
 }
