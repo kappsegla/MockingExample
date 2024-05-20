@@ -46,7 +46,7 @@ public class CalculatorTest {
     @Test
     @DisplayName("Test with delimiter set to ;")
     void testWithDelimiterSetTo() {
-        int result = calculator.add("//;\n1;2\n3");
+        int result = calculator.add("//[;]\n1;2\n3");
         assertThat(result).isEqualTo(6);
     }
 

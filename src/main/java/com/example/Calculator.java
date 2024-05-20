@@ -16,14 +16,14 @@ public class Calculator {
 
         if (numbers.startsWith("//")) {
             delimiter = "";
-            String [] subParts = parts[0].split("[\\]\\[]+");
+            parts[0]=parts[0].substring(3);
+            String [] subParts = parts[0].split("[]\\[]+");
             for (String subPart : subParts){
-                //delimiter.
+                delimiter= delimiter+"|"+subPart;
             }//split delimiter into parts. String concatenation. "+var1+"
             // "[0-9]{" + minValue + "," + maxValue + "}"
 
-            delimiter = parts[0].substring(2);
-
+            delimiter = "["+delimiter.substring(1)+"]+";
 
             parts = shift(parts);
         }
