@@ -1,4 +1,7 @@
 package com.example;
 
-public class EmployeeTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class EmployeeTest {
+
 }
