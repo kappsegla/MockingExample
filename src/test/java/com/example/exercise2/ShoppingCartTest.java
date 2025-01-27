@@ -2,6 +2,7 @@ package com.example.exercise2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 public class ShoppingCartTest {
     //FIXME Add the following test cases for ShoppingCartTest:
@@ -17,6 +18,7 @@ public class ShoppingCartTest {
     @DisplayName("Adding Item to shopping cart")
     void addingItemToShoppingCart() {
         shoppingCart.add("apple");
+        assertThatList(shoppingCart.items).contains("apple");
 
     }
 
