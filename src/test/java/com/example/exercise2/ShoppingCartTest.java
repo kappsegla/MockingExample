@@ -2,6 +2,7 @@ package com.example.exercise2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class ShoppingCartTest {
@@ -17,18 +18,19 @@ public class ShoppingCartTest {
     @Test
     @DisplayName("Adding Item to shopping cart test")
     void addingItemToShoppingCartTest() {
-        shoppingCart.addItem("apple");
-        assertThatList(shoppingCart.items).contains("apple");
+        shoppingCart.addItem("apple", 10, 5.0);
+        assertThat(shoppingCart.items).extracting("itemName", "quantity", "price")
+                .contains(tuple("apple", 10, 5.0));
 
     }
 
     @Test
-    @DisplayName("deleteItemInShoppingCartTest")
-    void deleteItemInShoppingCartTest() {
-        shoppingCart.addItem("apple");
-        shoppingCart.addItem("pineapple");
+    @DisplayName("deleteItemInShoppingCartByNameTest")
+    void deleteItemInShoppingCartByNameTest() {
+        shoppingCart.addItem("pineapple", 10, 10.0);
+        shoppingCart.addItem("apple", 10, 5.0);
         shoppingCart.deleteItem("apple");
-        assertThatList(shoppingCart.items).containsExactly("pineapple");
+        assertThatList(shoppingCart.items).extracting("itemName", "quantity", "price").contains(tuple("pineapple", 10, 10.0));
         assertThatList(shoppingCart.items).size().isEqualTo(1);
 
     }
@@ -43,8 +45,9 @@ public class ShoppingCartTest {
     @Test
     @DisplayName("getItemPriceTest")
     void getItemPriceTest() {
-        shoppingCart.addItem("apple");
-        assertThat(shoppingCart.getItemPrice("apple")).isEqualTo(5.00);
+        shoppingCart.addItem("apple", 10, 5.0);
+        shoppingCart.addItem("pineapple", 10, 10.0);
+        assertThat(shoppingCart.getItemPrice("apple")).isEqualTo(5.0);
 
     }
 

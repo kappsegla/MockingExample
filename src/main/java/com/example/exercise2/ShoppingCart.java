@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
-    List<String> items = new ArrayList<>();
+    List<CartItem> items = new ArrayList<>();
 
-    public void addItem(String itemName) {
-        items.add(itemName);
+    public void addItem(String itemName, int quantity, double price) {
+        items.add(new CartItem(itemName, quantity, price));
     }
 
     public void deleteItem(String itemName) {
-        items.remove(itemName);
+        items.stream().filter(cartItem -> cartItem.itemName().equals(itemName))
+                .findFirst()
+                .ifPresent(item -> items.remove(item));
     }
 
     public int size() {
@@ -19,7 +21,11 @@ public class ShoppingCart {
 
     }
 
-    public double getItemPrice(String apple) {
-        return 5.0;
+    public double getItemPrice(String itemName) {
+        return items.stream()
+                .filter(cartItem -> cartItem.itemName().equals(itemName))
+                .map(CartItem::price)
+                .findFirst()
+                .orElse(-1.0);
     }
 }
