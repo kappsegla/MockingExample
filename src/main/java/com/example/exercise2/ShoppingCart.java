@@ -20,6 +20,6 @@ public class ShoppingCart {
     }
 
     public double getItemPrice(String apple) {
-        return 0.0;
+        return 5.0;
     }
 }
