@@ -9,4 +9,8 @@ public class ShoppingCart {
     public void addItem(String itemName) {
         items.add(itemName);
     }
+
+    public void deleteItem(String itemName) {
+
+    }
 }
