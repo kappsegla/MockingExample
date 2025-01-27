@@ -17,7 +17,7 @@ public class ShoppingCartTest {
     @Test
     @DisplayName("Adding Item to shopping cart")
     void addingItemToShoppingCart() {
-        shoppingCart.add("apple");
+        shoppingCart.addItem("apple");
         assertThatList(shoppingCart.items).contains("apple");
 
     }

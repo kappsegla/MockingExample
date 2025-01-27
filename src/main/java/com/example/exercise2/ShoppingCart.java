@@ -1,10 +1,12 @@
 package com.example.exercise2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
-    List<String> items;
+    List<String> items = new ArrayList<>();
 
-    public void add(String itemName) {
+    public void addItem(String itemName) {
+        items.add(itemName);
     }
 }
