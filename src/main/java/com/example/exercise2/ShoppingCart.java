@@ -11,6 +11,15 @@ public class ShoppingCart {
     }
 
     public void deleteItem(String itemName) {
+        items.remove(itemName);
+    }
 
+    public int size() {
+        return items.size();
+
+    }
+
+    public double getItemPrice(String apple) {
+        return 0.0;
     }
 }

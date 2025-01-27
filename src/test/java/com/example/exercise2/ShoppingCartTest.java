@@ -33,4 +33,19 @@ public class ShoppingCartTest {
 
     }
 
+    @Test
+    @DisplayName("Shopping Cart Items is of Length zero at Start Test")
+    void shoppingCartItemsIsOfLengthZeroAtStartTest() {
+        assertThat(shoppingCart.size()).isEqualTo(0);
+
+    }
+
+    @Test
+    @DisplayName("getItemPriceTest")
+    void getItemPriceTest() {
+        shoppingCart.addItem("apple");
+        assertThat(shoppingCart.getItemPrice("apple")).isEqualTo(5.00);
+
+    }
+
 }
