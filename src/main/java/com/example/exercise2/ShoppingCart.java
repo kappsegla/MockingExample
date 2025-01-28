@@ -34,4 +34,7 @@ public class ShoppingCart {
                 .map(CartItem::price)
                 .reduce(0.0, Double::sum);
         }
+
+    public void applySaleToItem(String itemName, double discount) {
+    }
 }

@@ -86,6 +86,14 @@ public class ShoppingCartTest {
             
         }
 
+        @Test
+        @DisplayName("Apply Sales for item in ShoppingCart Test")
+        void applySalesForItemInShoppingCartTest() {
+            shoppingCart.applySaleToItem("pineapple", 0.25);
+            assertThat(shoppingCart.getItemPrice("pineapple")).isEqualTo(7.5);
+            
+        }
+
 
     }
 
