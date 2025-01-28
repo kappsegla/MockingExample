@@ -19,17 +19,32 @@ public class ShoppingCartTest {
 
     @Nested
     public class EmptyShoppingCart {
-    @Test
-    @DisplayName("Shopping Cart Items is of Length zero at Start Test")
-    void shoppingCartItemsIsOfLengthZeroAtStartTest() {
-        assertThat(shoppingCart.size()).isEqualTo(0);
+        @Test
+        @DisplayName("Shopping Cart Items is of Length zero at Start Test")
+        void shoppingCartItemsIsOfLengthZeroAtStartTest() {
+            assertThat(shoppingCart.size()).isEqualTo(0);
 
-    }
+        }
+
+        @Test
+        @DisplayName("Calculates sum for empty shopping cart Test")
+        void calculatesSumForEmptyShoppingCartTest() {
+            assertThat(shoppingCart.totalSum()).isEqualTo(0);
+            
+        }
+
+        @Test
+        @DisplayName("get price item minus one if item not found Test")
+        void getPriceItemMinusOneIfItemNotFoundTest() {
+            assertThat(shoppingCart.getItemPrice("")).isEqualTo(-1);
+            
+        }
+
 
     }
 
     @Nested
-    class itemInShoppingCart {
+    class itemsInShoppingCart {
 
         @BeforeEach
         void setUp() {
@@ -63,6 +78,14 @@ public class ShoppingCartTest {
             assertThat(shoppingCart.getItemPrice("apple")).isEqualTo(5.0);
 
         }
+
+        @Test
+        @DisplayName("Calculates total price for items in ShoppingCart Test")
+        void calculatesTotalPriceForItemsInShoppingCartTest() {
+            assertThat(shoppingCart.totalSum()).isEqualTo(30.0);
+            
+        }
+
 
     }
 

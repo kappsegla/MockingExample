@@ -28,4 +28,10 @@ public class ShoppingCart {
                 .findFirst()
                 .orElse(-1.0);
     }
+
+    public double totalSum() {
+        return items.stream()
+                .map(CartItem::price)
+                .reduce(0.0, Double::sum);
+        }
 }
