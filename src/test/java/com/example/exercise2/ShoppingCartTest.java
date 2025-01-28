@@ -30,14 +30,22 @@ public class ShoppingCartTest {
         @DisplayName("Calculates sum for empty shopping cart Test")
         void calculatesSumForEmptyShoppingCartTest() {
             assertThat(shoppingCart.totalSum()).isEqualTo(0);
-            
+
         }
 
         @Test
         @DisplayName("get price item minus one if item not found Test")
         void getPriceItemMinusOneIfItemNotFoundTest() {
             assertThat(shoppingCart.getItemPrice("")).isEqualTo(-1);
-            
+
+        }
+
+        @Test
+        @DisplayName("Apply Sales to empty shopping cart results in No item found exception test")
+        void applySalesToEmptyShoppingCartResultsInNoItemFoundExceptionTest() {
+            assertThatThrownBy(() -> shoppingCart.applySaleToItem("apple", 0.75)).
+                    isInstanceOf(IllegalArgumentException.class).hasMessageContaining("No item found");
+
         }
 
 
@@ -83,7 +91,7 @@ public class ShoppingCartTest {
         @DisplayName("Calculates total price for items in ShoppingCart Test")
         void calculatesTotalPriceForItemsInShoppingCartTest() {
             assertThat(shoppingCart.totalSum()).isEqualTo(30.0);
-            
+
         }
 
         @Test
@@ -91,7 +99,7 @@ public class ShoppingCartTest {
         void applySalesForItemInShoppingCartTest() {
             shoppingCart.applySaleToItem("pineapple", 0.25);
             assertThat(shoppingCart.getItemPrice("pineapple")).isEqualTo(7.5);
-            
+
         }
 
 

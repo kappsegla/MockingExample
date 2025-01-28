@@ -29,6 +29,12 @@ public class ShoppingCart {
                 .orElse(-1.0);
     }
 
+    public CartItem getItem(String itemName) {
+        return items.stream()
+                .filter(cartItem -> cartItem.itemName().equals(itemName))
+                .findFirst().orElseThrow(() -> new IllegalArgumentException("No item found"));
+    }
+
     public double totalSum() {
         return items.stream()
                 .map(CartItem::price)
@@ -36,5 +42,9 @@ public class ShoppingCart {
         }
 
     public void applySaleToItem(String itemName, double discount) {
+        var item = getItem(itemName);
+        deleteItem(itemName);
+        var newPrice = item.price() - (item.price() * discount);
+        addItem(itemName, item.quantity(), newPrice);
     }
 }
