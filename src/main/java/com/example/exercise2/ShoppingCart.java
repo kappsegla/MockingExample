@@ -1,10 +1,9 @@
 package com.example.exercise2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class ShoppingCart {
-    List<CartItem> items = new ArrayList<>();
+    HashSet<CartItem> items = new HashSet<>();
 
     public void addItem(String itemName, int quantity, double price) {
         items.add(new CartItem(itemName, quantity, price));
