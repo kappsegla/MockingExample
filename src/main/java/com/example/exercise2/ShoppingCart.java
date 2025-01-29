@@ -52,6 +52,9 @@ public class ShoppingCart {
     public void updateItemQuantity(String itemName, int quantity) {
         var item = getItem(itemName);
         var newQuantity = item.quantity() + quantity;
+        if (newQuantity < 0) {
+            throw new IllegalArgumentException("Item cannot have negative quantity");
+        }
         deleteItem(itemName);
         addItem(itemName, newQuantity, item.price());
     }

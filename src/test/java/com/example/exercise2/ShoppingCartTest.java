@@ -118,9 +118,30 @@ public class ShoppingCartTest {
             shoppingCart.updateItemQuantity("apple", -1);
             assertThat(shoppingCart.getItem("apple"))
                     .extracting("itemName", "quantity", "price")
-                    .containsExactly("apple", 8, 5.0);
+                    .containsExactly("apple", 9, 5.0);
 
         }
+
+        @Test
+        @DisplayName("Items quantity is negative results in Exception Test")
+        void itemsQuantityIsNegativeResultsInExceptionTest() {
+            assertThatThrownBy(() -> shoppingCart.updateItemQuantity("kiwi", -2))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("Item cannot have negative quantity");
+
+        }
+
+        @Test
+        @DisplayName("Items quantity zero is remove from shopping cart Test")
+        void itemsQuantityZeroIsRemoveFromShoppingCartTest() {
+            shoppingCart.updateItemQuantity("kiwi", -1);
+            assertThatThrownBy(() -> shoppingCart.getItem("kiwi"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("No item found");
+
+        }
+
+
 
 
     }
