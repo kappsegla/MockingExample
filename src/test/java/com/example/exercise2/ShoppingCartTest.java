@@ -49,8 +49,6 @@ public class ShoppingCartTest {
         }
 
 
-
-
     }
 
     @Nested
@@ -110,7 +108,17 @@ public class ShoppingCartTest {
             shoppingCart.updateItemQuantity("kiwi", 1);
             assertThat(shoppingCart.getItem("kiwi"))
                     .extracting("itemName", "quantity", "price")
-            .contains(tuple("kiwi", 2, 15.0));
+                    .contains("kiwi", 2, 15.0);
+
+        }
+
+        @Test
+        @DisplayName("Items in shopping cart updates quantity subtractive test")
+        void itemsInShoppingCartUpdatesQuantitySubtractiveTest() {
+            shoppingCart.updateItemQuantity("apple", -1);
+            assertThat(shoppingCart.getItem("apple"))
+                    .extracting("itemName", "quantity", "price")
+                    .containsExactly("apple", 8, 5.0);
 
         }
 

@@ -40,7 +40,7 @@ public class ShoppingCart {
                 .map(cartItem -> cartItem.price() * cartItem.quantity()).toList();
 
         return priceMultipliedQt.stream().reduce(0.0, Double::sum);
-        }
+    }
 
     public void applySaleToItem(String itemName, double discount) {
         var item = getItem(itemName);
@@ -49,6 +49,10 @@ public class ShoppingCart {
         addItem(itemName, item.quantity(), newPrice);
     }
 
-    public void updateItemQuantity(String s, int i) {
+    public void updateItemQuantity(String itemName, int quantity) {
+        var item = getItem(itemName);
+        var newQuantity = item.quantity() + quantity;
+        deleteItem(itemName);
+        addItem(itemName, newQuantity, item.price());
     }
 }
