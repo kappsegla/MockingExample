@@ -6,9 +6,7 @@ public class ShoppingCart {
     HashSet<CartItem> items = new HashSet<>();
 
     public void addItem(String itemName, int quantity, double price) {
-        if(itemName == null || itemName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Item name cannot be empty or null");
-        }
+        itemNameIsNotNullorEmpty(itemName);
         if(items.stream().anyMatch(i -> i.itemName().equalsIgnoreCase(itemName))) {
             throw new IllegalArgumentException("Item name already exists");
         }
@@ -23,10 +21,14 @@ public class ShoppingCart {
         items.add(new CartItem(itemName, quantity, price));
     }
 
-    public void deleteItem(String itemName) {
+    private static void itemNameIsNotNullorEmpty(String itemName) {
         if(itemName == null || itemName.trim().isEmpty()) {
             throw new IllegalArgumentException("Item name cannot be empty or null");
         }
+    }
+
+    public void deleteItem(String itemName) {
+        itemNameIsNotNullorEmpty(itemName);
         items.stream().filter(cartItem -> cartItem.itemName().equals(itemName))
                 .findFirst()
                 .ifPresent(item -> items.remove(item));

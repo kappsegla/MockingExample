@@ -236,7 +236,7 @@ public class ShoppingCartTest {
         @DisplayName("Deletion of item with empty string throws exception test")
         void deletionOfItemWithEmptyStringThrowsExceptionTest() {
             assertThatThrownBy(() -> shoppingCart.deleteItem("")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("Item name cannot be empty");
+                    .hasMessage("Item name cannot be empty or null");
 
         }
 
