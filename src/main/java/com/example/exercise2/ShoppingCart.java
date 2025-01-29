@@ -1,6 +1,7 @@
 package com.example.exercise2;
 
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 public class ShoppingCart {
     HashSet<CartItem> items = new HashSet<>();
@@ -35,9 +36,10 @@ public class ShoppingCart {
     }
 
     public double totalSum() {
-        return items.stream()
-                .map(CartItem::price)
-                .reduce(0.0, Double::sum);
+        var priceMultipliedQt = items.stream()
+                .map(cartItem -> cartItem.price() * cartItem.quantity()).toList();
+
+        return priceMultipliedQt.stream().reduce(0.0, Double::sum);
         }
 
     public void applySaleToItem(String itemName, double discount) {

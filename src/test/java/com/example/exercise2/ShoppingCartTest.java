@@ -29,7 +29,7 @@ public class ShoppingCartTest {
         @Test
         @DisplayName("Calculates sum for empty shopping cart Test")
         void calculatesSumForEmptyShoppingCartTest() {
-            assertThat(shoppingCart.totalSum()).isEqualTo(0);
+            assertThat(shoppingCart.totalSum()).isEqualTo(0.0);
 
         }
 
