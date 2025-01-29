@@ -6,6 +6,9 @@ public class ShoppingCart {
     HashSet<CartItem> items = new HashSet<>();
 
     public void addItem(String itemName, int quantity, double price) {
+        if(itemName == null || itemName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Item name cannot be empty or null");
+        }
         items.add(new CartItem(itemName, quantity, price));
     }
 
