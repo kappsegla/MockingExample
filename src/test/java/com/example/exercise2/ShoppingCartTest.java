@@ -179,8 +179,28 @@ public class ShoppingCartTest {
         @Test
         @DisplayName("Duplicate item name should not be added to shopping cart test")
         void duplicateItemNameShouldNotBeAddedToShoppingCartTest() {
-            shoppingCart.addItem("apple", 1, 2.0);
+            assertThatThrownBy(() -> shoppingCart.addItem("apple", 4, 2.0))
+                    .isInstanceOf(IllegalArgumentException.class).hasMessage("Item name already exists");
             assertThat(shoppingCart.size()).isEqualTo(1);
+            assertThat(shoppingCart.getItem("apple"))
+                    .extracting("itemName", "quantity", "price")
+                    .containsExactly("apple", 1, 1.0);
+
+        }
+
+        @Test
+        @DisplayName("Partial overlap with item name in Shopping Cart is Allowed Test")
+        void partialOverlapWithItemNameInShoppingCartIsAllowedTest() {
+            shoppingCart.addItem("pple", 4, 2.0);
+            assertThat(shoppingCart.size()).isEqualTo(2);
+
+        }
+
+        @Test
+        @DisplayName("Item name case ignore test")
+        void itemNameCaseIgnoreTest() {
+            assertThatThrownBy(() -> shoppingCart.addItem("Apple", 4, 2.0))
+                    .isInstanceOf(IllegalArgumentException.class).hasMessage("Item name already exists");
 
         }
     }

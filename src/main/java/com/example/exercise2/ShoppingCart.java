@@ -9,6 +9,9 @@ public class ShoppingCart {
         if(itemName == null || itemName.trim().isEmpty()) {
             throw new IllegalArgumentException("Item name cannot be empty or null");
         }
+        if(items.stream().anyMatch(i -> i.itemName().equals(itemName))) {
+            throw new IllegalArgumentException("Item name already exists");
+        }
         items.add(new CartItem(itemName, quantity, price));
     }
 
