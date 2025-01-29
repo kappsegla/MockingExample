@@ -172,7 +172,15 @@ public class ShoppingCartTest {
         @DisplayName("Passing Null as item name Throws exception Test")
         void passingNullAsItemNameThrowsExceptionTest() {
             assertThatThrownBy(() -> shoppingCart.addItem(null, 0, 1.0))
-                    .isInstanceOf(IllegalArgumentException.class).hasMessage("Item name cannot be empty");
+                    .isInstanceOf(IllegalArgumentException.class).hasMessage("Item name cannot be empty or null");
+
+        }
+
+        @Test
+        @DisplayName("Duplicate item name should not be added to shopping cart test")
+        void duplicateItemNameShouldNotBeAddedToShoppingCartTest() {
+            shoppingCart.addItem("apple", 1, 2.0);
+            assertThat(shoppingCart.size()).isEqualTo(1);
 
         }
     }
