@@ -1,7 +1,6 @@
 package com.example.exercise2;
 
 import java.util.HashSet;
-import java.util.stream.Collectors;
 
 public class ShoppingCart {
     HashSet<CartItem> items = new HashSet<>();

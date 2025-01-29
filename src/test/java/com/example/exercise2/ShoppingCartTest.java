@@ -18,7 +18,7 @@ public class ShoppingCartTest {
     ShoppingCart shoppingCart = new ShoppingCart();
 
     @Nested
-    public class EmptyShoppingCart {
+    public class EmptyShoppingCartTests {
         @Test
         @DisplayName("Shopping Cart Items is of Length zero at Start Test")
         void shoppingCartItemsIsOfLengthZeroAtStartTest() {
@@ -51,9 +51,9 @@ public class ShoppingCartTest {
         @Test
         @DisplayName("Try to update quantity with empty shopping cart Throws Exception Test")
         void tryToUpdateQuantityWithEmptyShoppingCartThrowsExceptionTest() {
-            assertThatThrownBy(() -> {shoppingCart.updateItemQuantity("apple", 1);})
+            assertThatThrownBy(() -> shoppingCart.updateItemQuantity("apple", 1))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("Empty shoppingcart item");
+                    .hasMessageContaining("No item found");
 
         }
 
@@ -61,7 +61,7 @@ public class ShoppingCartTest {
     }
 
     @Nested
-    class itemsInShoppingCart {
+    class itemsInShoppingCartTests {
 
         @BeforeEach
         void setUp() {
@@ -150,9 +150,24 @@ public class ShoppingCartTest {
 
         }
 
+    }
 
+    @Nested
+    class InputNormalizationTest {
+        @BeforeEach
+        void setUp() {
+            shoppingCart.addItem("apple", 1, 1.0);
+        }
 
+    }
 
+    @Test
+    @DisplayName("Empty item name when adding new item Throws Exception Test ")
+    void emptyItemNameWhenAddingNewItemThrowsExceptionTest() {
+        assertThatThrownBy(() -> shoppingCart.addItem("", 1, 1.0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Item name cannot be empty");
+        
     }
 
 }
