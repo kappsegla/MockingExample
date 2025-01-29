@@ -208,10 +208,31 @@ public class ShoppingCartTest {
         @DisplayName("Quantity cannot be less than or equal zero or null when adding item to shopping cart Test")
         void quantityCannotBeLessThanOrEqualZeroOrNullWhenAddingItemToShoppingCartTest() {
             assertThatThrownBy(() -> shoppingCart.addItem("orange", 0, 2.0))
-                    .isInstanceOf(IllegalArgumentException.class).hasMessage("Quantity cannot be less than or equal zero or null");
-
+                    .isInstanceOf(IllegalArgumentException.class).hasMessage("Quantity cannot be less than one");
 
         }
+
+        @Test
+        @DisplayName("Item Prices cannot be less than 0 or Exception is ThrownTest")
+        void itemPricesCannotBeLessThan0OrExceptionIsThrownTest() {
+            assertThatThrownBy(() -> shoppingCart.addItem("orange", 4, 0.0))
+                    .isInstanceOf(IllegalArgumentException.class).hasMessage("Item price cannot be less than zero");
+            assertThatCode(() -> shoppingCart.addItem("orange", 4, 0.001))
+                    .doesNotThrowAnyException();
+
+        }
+
+
+        @Test
+        @DisplayName("Deletion of item with null throws exception test")
+        void deletionOfItemWithNullThrowsExceptionTest() {
+            assertThatThrownBy(() -> shoppingCart.deleteItem(null))
+                    .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Item name cannot be empty or null");
+
+        }
+
+
 
     }
 

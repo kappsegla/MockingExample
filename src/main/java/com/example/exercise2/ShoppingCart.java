@@ -12,6 +12,14 @@ public class ShoppingCart {
         if(items.stream().anyMatch(i -> i.itemName().equalsIgnoreCase(itemName))) {
             throw new IllegalArgumentException("Item name already exists");
         }
+
+        if(!(quantity >= 1)) {
+            throw new IllegalArgumentException("Quantity cannot be less than one");
+        }
+
+        if(!(price > 0)) {
+            throw new IllegalArgumentException("Item price cannot be less than zero");
+        }
         items.add(new CartItem(itemName, quantity, price));
     }
 
