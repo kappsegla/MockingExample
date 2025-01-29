@@ -48,4 +48,7 @@ public class ShoppingCart {
         var newPrice = item.price() - (item.price() * discount);
         addItem(itemName, item.quantity(), newPrice);
     }
+
+    public void updateItemQuantity(String s, int i) {
+    }
 }

@@ -49,6 +49,8 @@ public class ShoppingCartTest {
         }
 
 
+
+
     }
 
     @Nested
@@ -90,7 +92,7 @@ public class ShoppingCartTest {
         @Test
         @DisplayName("Calculates total price for items in ShoppingCart Test")
         void calculatesTotalPriceForItemsInShoppingCartTest() {
-            assertThat(shoppingCart.totalSum()).isEqualTo(30.0);
+            assertThat(shoppingCart.totalSum()).isEqualTo(165.0);
 
         }
 
@@ -99,6 +101,16 @@ public class ShoppingCartTest {
         void applySalesForItemInShoppingCartTest() {
             shoppingCart.applySaleToItem("pineapple", 0.25);
             assertThat(shoppingCart.getItemPrice("pineapple")).isEqualTo(7.5);
+
+        }
+
+        @Test
+        @DisplayName("Items in shopping cart updates quantity additive test ")
+        void itemsInShoppingCartUpdatesQuantityAdditiveTest() {
+            shoppingCart.updateItemQuantity("kiwi", 1);
+            assertThat(shoppingCart.getItem("kiwi"))
+                    .extracting("itemName", "quantity", "price")
+            .contains(tuple("kiwi", 2, 15.0));
 
         }
 
