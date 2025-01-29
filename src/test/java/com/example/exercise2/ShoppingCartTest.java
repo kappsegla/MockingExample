@@ -203,6 +203,16 @@ public class ShoppingCartTest {
                     .isInstanceOf(IllegalArgumentException.class).hasMessage("Item name already exists");
 
         }
+
+        @Test
+        @DisplayName("Quantity cannot be less than or equal zero or null when adding item to shopping cart Test")
+        void quantityCannotBeLessThanOrEqualZeroOrNullWhenAddingItemToShoppingCartTest() {
+            assertThatThrownBy(() -> shoppingCart.addItem("orange", 0, 2.0))
+                    .isInstanceOf(IllegalArgumentException.class).hasMessage("Quantity cannot be less than or equal zero or null");
+
+
+        }
+
     }
 
 }

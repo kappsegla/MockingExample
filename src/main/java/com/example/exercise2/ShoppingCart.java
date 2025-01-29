@@ -9,7 +9,7 @@ public class ShoppingCart {
         if(itemName == null || itemName.trim().isEmpty()) {
             throw new IllegalArgumentException("Item name cannot be empty or null");
         }
-        if(items.stream().anyMatch(i -> i.itemName().equals(itemName))) {
+        if(items.stream().anyMatch(i -> i.itemName().equalsIgnoreCase(itemName))) {
             throw new IllegalArgumentException("Item name already exists");
         }
         items.add(new CartItem(itemName, quantity, price));
@@ -60,9 +60,9 @@ public class ShoppingCart {
         if (newQuantity < 0) {
             throw new IllegalArgumentException("Item cannot have negative quantity");
         }
-        if (newQuantity == 0) {
-            deleteItem(itemName);
-        } else {
+
+        if (newQuantity == 0) deleteItem(itemName);
+        else {
             deleteItem(itemName);
             addItem(itemName, newQuantity, item.price());
         }
