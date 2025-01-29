@@ -24,6 +24,9 @@ public class ShoppingCart {
     }
 
     public void deleteItem(String itemName) {
+        if(itemName == null || itemName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Item name cannot be empty or null");
+        }
         items.stream().filter(cartItem -> cartItem.itemName().equals(itemName))
                 .findFirst()
                 .ifPresent(item -> items.remove(item));
