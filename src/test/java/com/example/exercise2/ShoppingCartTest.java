@@ -48,6 +48,15 @@ public class ShoppingCartTest {
 
         }
 
+        @Test
+        @DisplayName("Try to update quantity with empty shopping cart Throws Exception Test")
+        void tryToUpdateQuantityWithEmptyShoppingCartThrowsExceptionTest() {
+            assertThatThrownBy(() -> {shoppingCart.updateItemQuantity("apple", 1);})
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("Empty shoppingcart item");
+
+        }
+
 
     }
 

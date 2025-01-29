@@ -55,7 +55,11 @@ public class ShoppingCart {
         if (newQuantity < 0) {
             throw new IllegalArgumentException("Item cannot have negative quantity");
         }
-        deleteItem(itemName);
-        addItem(itemName, newQuantity, item.price());
+        if (newQuantity == 0) {
+            deleteItem(itemName);
+        } else {
+            deleteItem(itemName);
+            addItem(itemName, newQuantity, item.price());
+        }
     }
 }
