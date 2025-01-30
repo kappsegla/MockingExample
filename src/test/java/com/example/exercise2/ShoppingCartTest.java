@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -255,9 +254,20 @@ public class ShoppingCartTest {
         void emptyOrNullStringWhenGettingItemFromShoppingCartThrowsError() {
             assertThatThrownBy(() -> shoppingCart.getItem(null))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("Item name cannot be empty or null");
+                    .hasMessage("No item found");
 
         }
+
+        @Test
+        @DisplayName("item discount is within the range of zero and one test")
+        void itemDiscountIsWithinTheRangeOfZeroAndOneTest() {
+            assertThatThrownBy(() -> shoppingCart.applySaleToItem("apple", 1.01))
+                    .isInstanceOf(IllegalArgumentException.class).hasMessage("Item discount cannot be greater than one");
+            assertThatThrownBy(() -> shoppingCart.applySaleToItem("apple", -0.01))
+                    .isInstanceOf(IllegalArgumentException.class).hasMessage("Item discount cannot be less than zero");
+
+        }
+
 
 
 
