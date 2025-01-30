@@ -243,14 +243,10 @@ public class ShoppingCartTest {
         }
 
         @Test
-        @DisplayName("Empty or null string when price getting item throw exception test ")
-        void emptyOrNullStringWhenPriceGettingItemThrowExceptionTest() {
-            assertThatThrownBy(() -> shoppingCart.getItemPrice(null))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("Item name cannot be empty or null");
-            assertThatThrownBy(() -> shoppingCart.getItemPrice(""))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("Item name cannot be empty or null");
+        @DisplayName("Empty or null string when price getting item returns minus one test ")
+        void emptyOrNullStringWhenPriceGettingItemReturnsMinusOneTest() {
+            assertThat(shoppingCart.getItemPrice(null)).isEqualTo(-1.0);
+            assertThat(shoppingCart.getItemPrice("")).isEqualTo(-1.0);
 
         }
 
@@ -258,7 +254,8 @@ public class ShoppingCartTest {
         @DisplayName("Empty or null string when getting item from shopping cart throws error")
         void emptyOrNullStringWhenGettingItemFromShoppingCartThrowsError() {
             assertThatThrownBy(() -> shoppingCart.getItem(null))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("Item name cannot be empty or null");
 
         }
 

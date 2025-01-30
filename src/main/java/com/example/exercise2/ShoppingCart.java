@@ -40,7 +40,6 @@ public class ShoppingCart {
     }
 
     public double getItemPrice(String itemName) {
-        itemNameIsNotNullorEmpty(itemName);
         return items.stream()
                 .filter(cartItem -> cartItem.itemName().equals(itemName))
                 .map(CartItem::price)
