@@ -266,6 +266,9 @@ public class ShoppingCartTest {
             assertThatThrownBy(() -> shoppingCart.applySaleToItem("apple", -0.01))
                     .isInstanceOf(IllegalArgumentException.class).hasMessage("Item discount cannot be less than zero");
 
+            assertThatCode(() -> shoppingCart.applySaleToItem("apple", 0.0)).doesNotThrowAnyException();
+            assertThatCode(() -> shoppingCart.applySaleToItem("apple", 1.0)).doesNotThrowAnyException();
+
         }
 
 

@@ -15,7 +15,7 @@ public class ShoppingCart {
             throw new IllegalArgumentException("Quantity cannot be less than one");
         }
 
-        if(!(price > 0)) {
+        if(!(price >= 0)) {
             throw new IllegalArgumentException("Item price cannot be less than zero");
         }
         items.add(new CartItem(itemName, quantity, price));
@@ -60,7 +60,19 @@ public class ShoppingCart {
         return priceMultipliedQt.stream().reduce(0.0, Double::sum);
     }
 
+    /**
+     * Method calculates a new discounted price of item.
+     * @param itemName
+     * @param discount range is from 0.0 to 1.0 where 1.0 = 100%
+     */
     public void applySaleToItem(String itemName, double discount) {
+        if (!(discount >= 0)) {
+            throw new IllegalArgumentException("Item discount cannot be less than zero");
+
+        } else if (!(discount <= 1)) {
+            throw new IllegalArgumentException("Item discount cannot be greater than one");
+
+        }
         var item = getItem(itemName);
         deleteItem(itemName);
         var newPrice = item.price() - (item.price() * discount);
