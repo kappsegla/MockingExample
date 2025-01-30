@@ -9,12 +9,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 public class ShoppingCartTest {
-    //FIXME Add the following test cases for ShoppingCartTest:
-    //  - Add items
-    //  - Delete items
-    //  - Calculate total sum for all items
-    //  - Apply sales discount
-    //  - Mange/handle item stock updates
 
     ShoppingCart shoppingCart = new ShoppingCart();
 
@@ -216,7 +210,7 @@ public class ShoppingCartTest {
         @Test
         @DisplayName("Item Prices cannot be less than 0 or Exception is ThrownTest")
         void itemPricesCannotBeLessThan0OrExceptionIsThrownTest() {
-            assertThatThrownBy(() -> shoppingCart.addItem("orange", 4, 0.0))
+            assertThatThrownBy(() -> shoppingCart.addItem("orange", 4, -0.01))
                     .isInstanceOf(IllegalArgumentException.class).hasMessage("Item price cannot be less than zero");
             assertThatCode(() -> shoppingCart.addItem("orange", 4, 0.001))
                     .doesNotThrowAnyException();
