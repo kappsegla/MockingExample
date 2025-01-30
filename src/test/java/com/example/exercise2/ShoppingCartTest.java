@@ -254,6 +254,14 @@ public class ShoppingCartTest {
 
         }
 
+        @Test
+        @DisplayName("Empty or null string when getting item from shopping cart throws error")
+        void emptyOrNullStringWhenGettingItemFromShoppingCartThrowsError() {
+            assertThatThrownBy(() -> shoppingCart.getItem(null))
+                    .isInstanceOf(IllegalArgumentException.class);
+
+        }
+
 
 
     }
