@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class ShoppingCartTest {
@@ -236,6 +238,18 @@ public class ShoppingCartTest {
         @DisplayName("Deletion of item with empty string throws exception test")
         void deletionOfItemWithEmptyStringThrowsExceptionTest() {
             assertThatThrownBy(() -> shoppingCart.deleteItem("")).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("Item name cannot be empty or null");
+
+        }
+
+        @Test
+        @DisplayName("Empty or null string when price getting item throw exception test ")
+        void emptyOrNullStringWhenPriceGettingItemThrowExceptionTest() {
+            assertThatThrownBy(() -> shoppingCart.getItemPrice(null))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("Item name cannot be empty or null");
+            assertThatThrownBy(() -> shoppingCart.getItemPrice(""))
+                    .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("Item name cannot be empty or null");
 
         }
