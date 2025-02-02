@@ -51,6 +51,12 @@ class ShoppingCartTest {
         cart.removeItem("1");
         assertTrue(cart.isEmpty(), "Varukorg borde vara tom igen.");
     }
+    @Test
+    void updateItemQuantityTest() {
+        shoppingCart.addItem("1", "Apple", 10.0,2);
+        shoppingCart.updateQuantity("1", 5);
+        assertThat(shoppingCart.calculateTotal()).isEqualTo(50.0);
+    }
 
 
 }
