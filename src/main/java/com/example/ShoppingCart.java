@@ -22,4 +22,10 @@ public class ShoppingCart {
         double total =items.values().stream().mapToDouble(CartItem::totalPrice).sum();
         return total * (1 - discount / 100);
     }
+    public void removeItem(String productId){
+        if(!items.containsKey(productId)){
+            throw new IllegalArgumentException("Produkten finns inte i kundvagnen");
+        }
+        items.remove(productId);
+    }
 }
