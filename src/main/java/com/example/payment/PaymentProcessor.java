@@ -27,19 +27,3 @@ public class PaymentProcessor {
         }return response.isSuccess();
     }
 }
-
-//.executeUpdate("INSERT INTO payments (amount, status) VALUES (" + amount + ", 'SUCCESS')");
-
-//if (response.isSuccess()) {
-//        DatabaseConnection.getInstance()
-//                    .executeUpdate("INSERT INTO payments (amount, status) VALUES (" + amount + ", 'SUCCESS')");
-//        }
-//
-//                // Skickar e-post direkt
-//                if (response.isSuccess()) {
-//        EmailService.sendPaymentConfirmation("user@example.com", amount);
-//        }
-// Skickar e-post direkt
-//        if (response.isSuccess()) {
-//            EmailService.sendPaymentConfirmation("user@example.com", amount);
-////PaymentApiResponse response = PaymentApi.charge(API_KEY, amount);

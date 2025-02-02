@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 class ShoppingCartTest {
     private ShoppingCart shoppingCart;
@@ -40,7 +41,7 @@ class ShoppingCartTest {
         assertThat(shoppingCart.calculateTotal()).isEqualTo(expectedTotal);
     }
     @Test
-    public void testIsEmpty() {
+    public void cartIsEmptyTest() {
         ShoppingCart cart = new ShoppingCart();
 
         assertTrue(cart.isEmpty(), "Tom varukorg.");
@@ -56,6 +57,31 @@ class ShoppingCartTest {
         shoppingCart.addItem("1", "Apple", 10.0,2);
         shoppingCart.updateQuantity("1", 5);
         assertThat(shoppingCart.calculateTotal()).isEqualTo(50.0);
+    }
+
+    @Test
+    void throwExceptionWhenAddingItemWithNegativePrice(){
+        assertThatThrownBy(() -> shoppingCart.addItem("1", "Apple", -10.0, 2))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Pris och mängd måste vara positiva");
+    }
+    @Test
+    void throwExceptionWhenApplyingInvalidDiscount(){
+        assertThatThrownBy(() -> shoppingCart.applyDiscount(150))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Rabatten måste vara mellan 0 och 100%");
+    }
+    @Test
+    void removeItemQuantityIsZeroTest() {
+        shoppingCart.addItem("1", "Apple", 10.0,2);
+        shoppingCart.updateQuantity("1", 0);
+        assertThat(shoppingCart.calculateTotal()).isEqualTo(0.0);
+    }
+    @Test
+    void throwExceptionWhenRemovingNonExistentItem() {
+        assertThatThrownBy(() -> shoppingCart.removeItem("999"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Produkten finns inte i kundvagnen");
     }
 
 

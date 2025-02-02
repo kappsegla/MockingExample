@@ -49,7 +49,4 @@ class PaymentProcessorTest {
         verify(emailService, never()).sendPaymentConfirmation(anyString(),anyDouble());
     }
 
-    @Test
-    void processPayment() {
-    }
 }
