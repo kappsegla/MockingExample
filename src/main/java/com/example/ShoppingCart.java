@@ -28,4 +28,11 @@ public class ShoppingCart {
         }
         items.remove(productId);
     }
+    public void applyDiscount(double discountPercentage){
+        if(discountPercentage < 0 || discountPercentage > 100){
+            throw new IllegalArgumentException("Rabatten måste vara mellan 0 och 100%");
+        }
+        this.discount += discountPercentage;
+
+    }
 }
