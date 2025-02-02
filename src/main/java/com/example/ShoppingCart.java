@@ -35,4 +35,8 @@ public class ShoppingCart {
         this.discount += discountPercentage;
 
     }
+    public boolean isEmpty(){
+
+        return items.isEmpty();
+    }
 }

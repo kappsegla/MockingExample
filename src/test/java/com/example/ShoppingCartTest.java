@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 class ShoppingCartTest {
     private ShoppingCart shoppingCart;
 
@@ -38,7 +39,18 @@ class ShoppingCartTest {
         double expectedTotal = 40.0 + 30.0;
         assertThat(shoppingCart.calculateTotal()).isEqualTo(expectedTotal);
     }
+    @Test
+    public void testIsEmpty() {
+        ShoppingCart cart = new ShoppingCart();
 
+        assertTrue(cart.isEmpty(), "Tom varukorg.");
+
+        cart.addItem("1", "Apple", 1.5, 2);
+        assertFalse(cart.isEmpty(), "Varukorgen inte tom, lagt till en produkt");
+
+        cart.removeItem("1");
+        assertTrue(cart.isEmpty(), "Varukorg borde vara tom igen.");
+    }
 
 
 }
