@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 class ShoppingCartTest {
     private ShoppingCart shoppingCart;
 
@@ -31,6 +30,15 @@ class ShoppingCartTest {
         shoppingCart.applyDiscount(10);
         assertThat(shoppingCart.calculateTotal()).isEqualTo(90.0);
     }
+    @Test
+    void calculateTotalTest() {
+        shoppingCart.addItem("1", "Apple", 20.0, 2);
+        shoppingCart.addItem("2", "Banana", 10.0, 3);
+
+        double expectedTotal = 40.0 + 30.0;
+        assertThat(shoppingCart.calculateTotal()).isEqualTo(expectedTotal);
+    }
+
 
 
 }
